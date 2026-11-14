@@ -13,7 +13,7 @@ import streamlit as st
 import rules
 
 importlib.reload(rules)  # Streamlit reruns app.py on deploy but keeps imported modules; pick up rule changes too
-from rules import (BEIGHTON, CBC, IRON, OTHER, SYMPTOM_LINKS, TESTS, analyse, beighton_cutoff, has,  # noqa: E402
+from rules import (BEIGHTON, CBC, CHECKLIST, IRON, OTHER, SYMPTOM_LINKS, TESTS, analyse, beighton_cutoff, has,  # noqa: E402
                    preselect_symptoms, ref_range, status, summarize_history, symptom_clues)
 
 HERE = Path(__file__).parent
@@ -174,6 +174,10 @@ with tab_doc:
                 st.caption(f"Rule {pat['rule']}: {pat['rule_text']} Draft, awaiting clinical sign-off.")
         if missing:
             st.warning("**Missing before a confident reading:** " + "; ".join(missing))
+        with st.expander("Before you decide: what to check and ask"):
+            st.caption("The checks our clinical partner repeats most often in his teaching, most frequent first.")
+            for i, item in enumerate(CHECKLIST):
+                st.checkbox(item, key=f"ck-{pid}-{i}")
         st.markdown("**BloodClue does not diagnose. The doctor reviews and decides.**")
 
 # ---------- tab 2: the patient's whole story, so it is never retold ----------
@@ -219,14 +223,21 @@ with tab_hist:
 with tab_kb:
     kb = json.loads((HERE / "knowledge.json").read_text(encoding="utf-8"))
     st.subheader("What our clinical partner teaches")
-    st.info(f"Drafted from {sum(e['videos'] for e in kb)} references in the educational videos of a Dubai "
+    st.info(f"Drafted from {sum(e['videos'] for e in kb)} references across 1,370 educational videos of a Dubai "
             "internal-medicine specialist, translated from Arabic by automatic transcription. Every point awaits his "
             "sign-off before it becomes a rule. Points marked **Unreviewed draft** contain doses or numbers that may "
             "have been misheard. Not medical advice.")
     kinds = {"lab_rule": "Lab", "symptom": "Symptom", "cause": "Cause", "treatment": "Treatment",
-             "advice": "Advice", "myth": "Myth"}
-    for e in kb:
-        with st.expander(f"**{e['topic']}**, {e['videos']} videos"):
+             "advice": "Advice", "myth": "Myth", "checklist": "Check"}
+    areas = list(dict.fromkeys(e["area"] for e in kb))
+    f1, f2 = st.columns([1, 2])
+    area = f1.selectbox("Area", ["All areas"] + areas, index=1)
+    query = f2.text_input("Search", placeholder="e.g. ferritin, tingling, HbA1c, constipation").strip().lower()
+    hits = [e for e in kb if (area == "All areas" or e["area"] == area)
+            and (not query or query in (e["topic"] + " " + " ".join(x["statement"] for x in e["points"])).lower())]
+    st.caption(f"{len(hits)} topics, {sum(len(e['points']) for e in hits)} points")
+    for e in hits[:80]:
+        with st.expander(f"**{e['topic']}** ({e['area']}, {e['videos']} videos)"):
             for x in e["points"]:
                 flag = ":orange-badge[Unreviewed draft] " if x["needs_review"] else ""
                 st.markdown(f"- {flag}**{kinds.get(x['type'], 'Note')}.** {x['statement']}")

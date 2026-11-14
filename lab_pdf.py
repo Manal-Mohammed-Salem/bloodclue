@@ -27,6 +27,7 @@ ALIASES = {
     "vitd": r"(?:Vitamin D(?: \(25 ?OH\))?|25[- ]?OH(?: Vitamin D)?)",
     "tsh": r"TSH",
     "mg": r"Magnesium",
+    "hba1c": r"(?:HbA1c|HBA1C|Hb A1c|Glycated ha?emoglobin)",
 }
 LINE = {k: re.compile(rf"^\s*\*?\s*{a}\s+{NUM}\s*(\S+)?", re.I) for k, a in ALIASES.items()}
 DATE = re.compile(r"(?:Lab Order Date|Collected(?: Time)?|Sample Collected On|Reported Time|Report Date)\s*:?\s*"

@@ -24,10 +24,11 @@ TESTS = {
     "vitd":     ("Vitamin D", "ng/mL", (30, 100)),
     "tsh":      ("TSH", "µIU/mL", (0.27, 4.2)),
     "mg":       ("Magnesium", "mg/dL", (1.6, 2.6)),
+    "hba1c":    ("HbA1c", "%", (4.0, 5.6)),
 }
 CBC = ["hb", "rbc", "mcv", "rdw", "wbc", "neut", "eos", "plt"]
 IRON = ["ferritin", "iron", "tibc", "tsat", "crp"]
-OTHER = ["b12", "vitd", "tsh", "mg"]
+OTHER = ["b12", "vitd", "tsh", "mg", "hba1c"]
 OPTIONAL = {"crp", "neut", "eos"} | set(OTHER)  # not flagged as missing when absent
 SYMPTOMS = ("tired", "fatigue", "dizz", "hair loss", "poor focus", "headache", "weak", "cold")
 
@@ -53,7 +54,21 @@ SYMPTOM_LINKS = {
     "Sore tongue / mouth ulcers": [("Vitamin B12 deficiency", "b12", "Low"), ("Iron deficiency", "ferritin", "Low")],
     "Muscle cramps or aches": [("Vitamin D deficiency", "vitd", "Low"), ("Low magnesium", "mg", "Low"),
                                ("Dehydration", None, None)],
-    "Thirst, dry mouth, dark urine": [("Dehydration", None, None)],
+    "Thirst, dry mouth, dark urine": [("Dehydration", None, None), ("High blood sugar", "hba1c", "High")],
+    "Passing urine often": [("High blood sugar", "hba1c", "High")],
+    "Irritability or mood swings": [("Iron deficiency", "ferritin", "Low"), ("Vitamin B12 deficiency", "b12", "Low"),
+                                    ("Vitamin D deficiency", "vitd", "Low")],
+    "Low mood": [("Vitamin D deficiency", "vitd", "Low"), ("Vitamin B12 deficiency", "b12", "Low"),
+                 ("Underactive thyroid", "tsh", "High")],
+    "Broken sleep at night": [("Iron deficiency", "ferritin", "Low"), ("Low magnesium", "mg", "Low")],
+    "Constipation": [("Underactive thyroid", "tsh", "High"), ("Dehydration", None, None)],
+    "Weight gain that won't come off": [("Underactive thyroid", "tsh", "High"), ("High blood sugar", "hba1c", "High")],
+    "Hand tremor": [("Overactive thyroid", "tsh", "Low"), ("Low magnesium", "mg", "Low")],
+    "Unsteady walking or poor balance": [("Vitamin B12 deficiency", "b12", "Low")],
+    "Heavy periods": [("Iron deficiency", "ferritin", "Low"), ("Underactive thyroid", "tsh", "High")],
+    "Bone pain": [("Vitamin D deficiency", "vitd", "Low")],
+    "Early grey hair": [("Vitamin B12 deficiency", "b12", "Low"), ("Iron deficiency", "ferritin", "Low")],
+    "Dry skin": [("Underactive thyroid", "tsh", "High"), ("Dehydration", None, None)],
     "Joint pain (knees, wrists, back)": [("Joint hypermobility", "beighton", "High"),
                                          ("Vitamin D deficiency", "vitd", "Low")],
     "Frequent sprains or dislocations": [("Joint hypermobility", "beighton", "High")],
@@ -84,7 +99,28 @@ SYMPTOM_WORDS = {"tingl": "Tingling or numb hands/feet", "numb": "Tingling or nu
                  "muscle": "Muscle cramps or aches", "cramp": "Muscle cramps or aches",
                  "thirst": "Thirst, dry mouth, dark urine", "joint": "Joint pain (knees, wrists, back)",
                  "knee": "Joint pain (knees, wrists, back)", "sprain": "Frequent sprains or dislocations",
-                 "disloc": "Frequent sprains or dislocations"}
+                 "disloc": "Frequent sprains or dislocations", "irrit": "Irritability or mood swings",
+                 "mood": "Irritability or mood swings", "depress": "Low mood", "sleep": "Broken sleep at night",
+                 "constip": "Constipation", "weight gain": "Weight gain that won't come off", "tremor": "Hand tremor",
+                 "balance": "Unsteady walking or poor balance", "heavy period": "Heavy periods",
+                 "bone pain": "Bone pain", "grey": "Early grey hair", "gray": "Early grey hair",
+                 "dry skin": "Dry skin", "urinat": "Passing urine often"}
+
+# What to check or ask before deciding, ranked by how often the clinical partner repeats it in his videos
+CHECKLIST = [
+    "Which symptoms, and since when?",
+    "How much water a day? (dehydration can make haemoglobin look falsely normal)",
+    "Tiredness, poor focus, forgetfulness?",
+    "Dizziness or headaches?",
+    "Hair loss, brittle nails?",
+    "Broken sleep, palpitations?",
+    "Periods: heavy or irregular?",
+    "Gut: constipation, bloating, heartburn, acid-reducing medicines?",
+    "Diet, tea or coffee with meals?",
+    "Previous iron, B12 or vitamin D treatment, and did symptoms improve?",
+    "Ferritin, B12, vitamin D, TSH and HbA1c measured, not only haemoglobin?",
+    "Any cause found for a low value (blood loss, poor absorption), not only replacement?",
+]
 
 
 def has(v):
@@ -349,4 +385,9 @@ if __name__ == "__main__":  # self-check: python rules.py
     ev = {c["cause"]: c["evidence"] for c in symptom_clues(["Dizziness"], {"sex": "F", "ferritin": 23.4, "hb": 13.1})}
     assert ev["Iron deficiency"] == "supported"  # low-normal ferritin agrees with IRON-04
     assert preselect_symptoms("muscle and joint pain") == ["Muscle cramps or aches", "Joint pain (knees, wrists, back)"]
+    # new links: every linked lab key exists; thirst checks HbA1c; free text pre-selects new symptoms
+    assert all(k is None or k == "beighton" or k in TESTS for links in SYMPTOM_LINKS.values() for _, k, _ in links)
+    ev = {c["cause"]: c["evidence"] for c in symptom_clues(["Thirst, dry mouth, dark urine"], {"hba1c": 7.1})}
+    assert ev["High blood sugar"] == "supported"
+    assert "Constipation" in preselect_symptoms("chronic constipation, irritability")
     print("rules self-check passed")
