@@ -12,6 +12,8 @@ TESTS = {
     "mcv":      ("MCV", "fL", (80, 100)),
     "rdw":      ("RDW", "%", (11.5, 14.5)),
     "wbc":      ("White cells", "×10⁹/L", (4.0, 11.0)),
+    "neut":     ("Neutrophils", "×10⁹/L", (1.8, 7.7)),
+    "eos":      ("Eosinophils", "×10⁹/L", (0.0, 0.5)),
     "plt":      ("Platelets", "×10⁹/L", (150, 400)),
     "ferritin": ("Ferritin", "ng/mL", {"F": (15, 150), "M": (30, 400)}),
     "iron":     ("Serum iron", "µg/dL", (60, 170)),
@@ -19,7 +21,9 @@ TESTS = {
     "tsat":     ("Transferrin saturation", "%", (20, 50)),
     "crp":      ("CRP", "mg/L", (0, 5)),
 }
-CBC = ["hb", "rbc", "mcv", "rdw", "wbc", "plt"]
+CBC = ["hb", "rbc", "mcv", "rdw", "wbc", "neut", "eos", "plt"]
+OPTIONAL = {"crp", "neut", "eos"}  # not flagged as missing when absent
+SYMPTOMS = ("tired", "fatigue", "dizz", "hair loss", "poor focus", "headache", "weak", "cold")
 IRON = ["ferritin", "iron", "tibc", "tsat", "crp"]
 
 
@@ -39,12 +43,16 @@ def status(key, value, sex):
     return "Low" if value < lo else "High" if value > hi else "Normal"
 
 
-def analyse(p):
-    """p: dict with sex ('F'/'M') and test keys. Returns (statuses, patterns, missing)."""
+def analyse(p, history=()):
+    """p: dict with sex ('F'/'M') and test keys; history: earlier results of the same patient, oldest first.
+    Returns (statuses, patterns, missing)."""
     sex = p.get("sex", "F")
     st = {k: status(k, p.get(k), sex) for k in TESTS}
     v = {k: p.get(k) for k in TESTS}
     patterns, missing = [], []
+    symptoms = str(p.get("symptoms") or "").lower()
+    has_symptoms = any(s in symptoms for s in SYMPTOMS)
+    treatment = (str(p.get("medicines") or "") + " " + str(p.get("notes") or "")).lower()
 
     # IRON-01: depleted iron stores
     if has(v["ferritin"]) and v["ferritin"] < 15:
@@ -64,6 +72,40 @@ def analyse(p):
             "rule_text": "Ferritin under 30 ng/mL with transferrin saturation under 20% may indicate early iron deficiency.",
             "supports": [f"Ferritin {v['ferritin']}", f"Transferrin saturation {v['tsat']}% (low)"],
             "against": [], "ask": ["Symptoms of tiredness or hair loss?", "Previous ferritin values?"],
+        })
+    # IRON-04: low-normal ferritin with symptoms, which a wide lab range can call "normal"
+    elif has(v["ferritin"]) and v["ferritin"] < 30 and has_symptoms:
+        patterns.append({
+            "title": "Low-normal ferritin with symptoms: possible iron deficiency", "rule": "IRON-04",
+            "rule_text": "Ferritin under 30 ng/mL is a common threshold for iron deficiency; a lab range starting near 10 "
+                         "can still print it as normal.",
+            "supports": [f"Ferritin {v['ferritin']} (inside the lab range, under 30)", f"Symptoms: {p.get('symptoms')}"],
+            "against": ([] if st["hb"] != "Normal" else ["Haemoglobin normal"]),
+            "ask": ["Diet and appetite?", "Blood loss?", "Gut symptoms or poor absorption?", "Previous ferritin values?"],
+        })
+    # IRON-05: high ferritin right after IV iron or with inflammation is not iron overload by itself
+    if st["ferritin"] == "High" and ("iv iron" in treatment or st["crp"] == "High"
+                                     or any(h.get("crp") and status("crp", h["crp"], sex) == "High" for h in history[-1:])):
+        patterns.append({
+            "title": "High ferritin: check recent IV iron and inflammation first", "rule": "IRON-05",
+            "rule_text": "Ferritin rises for weeks after IV iron and during inflammation; it does not mean iron overload "
+                         "on its own. Read it with transferrin saturation and CRP, and recheck later.",
+            "supports": [f"Ferritin {v['ferritin']} (high)"]
+                        + (["Recent IV iron"] if "iv iron" in treatment else [])
+                        + ([f"Transferrin saturation {v['tsat']}% (not high)"] if st["tsat"] in ("Normal", "Low") else []),
+            "against": [] , "ask": ["Date of the last IV iron dose?", "Recent infection or fever?"],
+        })
+    # WBC-01: raised eosinophils, more important when they stay raised over time
+    if st["eos"] == "High":
+        earlier = [h for h in history if has(h.get("eos")) and status("eos", h["eos"], sex) == "High"]
+        patterns.append({
+            "title": ("Eosinophils raised in repeated tests" if earlier else "Raised eosinophils"), "rule": "WBC-01",
+            "rule_text": "Raised eosinophils have several causes, including allergy, asthma, eczema, some medicines and "
+                         "parasites; parasites can also cause iron deficiency and poor absorption.",
+            "supports": [f"Eosinophils {v['eos']} (high)"] + [f"Also high on {h.get('date', 'an earlier test')}: {h['eos']}"
+                                                            for h in earlier],
+            "against": [], "ask": ["Allergy, asthma or eczema?", "Travel, or a stool test for parasites?",
+                                   "New medicines?"],
         })
     # IRON-03: low saturation with normal/high ferritin -> inflammation may mask iron deficiency
     if has(v["ferritin"]) and v["ferritin"] >= 30 and st["tsat"] == "Low":
@@ -96,11 +138,11 @@ def analyse(p):
 
     if has(v["ferritin"]) and not has(v["crp"]):
         missing.append("CRP (inflammation can hide low iron)")
-    if not p.get("previous"):
+    if not history and not p.get("previous"):
         missing.append("Previous results, for the trend")
     if not p.get("medicines"):
         missing.append("Current medicines and supplements")
-    missing += [f"{TESTS[k][0]} result" for k in CBC + IRON if k != "crp" and not has(v[k])]
+    missing += [f"{TESTS[k][0]} result" for k in CBC + IRON if k not in OPTIONAL and not has(v[k])]
     return st, patterns, missing
 
 
@@ -116,4 +158,15 @@ if __name__ == "__main__":  # self-check: python rules.py
     assert [x["rule"] for x in pats] == ["CBC-02"]
     _, pats, _ = analyse({"sex": "F", "hb": 11.5, "ferritin": 85, "tsat": 12, "crp": 24})
     assert [x["rule"] for x in pats] == ["IRON-03"]
+    # low-normal ferritin + symptoms -> IRON-04; without symptoms -> nothing
+    _, pats, _ = analyse({"sex": "F", "hb": 13.1, "ferritin": 23.4, "symptoms": "dizziness, tiredness"})
+    assert [x["rule"] for x in pats] == ["IRON-04"]
+    _, pats, _ = analyse({"sex": "F", "hb": 13.1, "ferritin": 23.4, "symptoms": "routine check"})
+    assert pats == []
+    # high ferritin after inflammation on the previous test + eosinophils high again -> IRON-05 and persistent WBC-01
+    hist = [{"date": "2026-04-28", "eos": 0.96}, {"date": "2026-08-03", "crp": 29.9, "eos": 0.23}]
+    _, pats, miss = analyse({"sex": "F", "ferritin": 235, "tsat": 28.4, "eos": 0.93}, history=hist)
+    assert [x["rule"] for x in pats] == ["IRON-05", "WBC-01"], pats
+    assert "repeated" in pats[1]["title"] and "2026-04-28" in pats[1]["supports"][1]
+    assert not any("Previous results" in m for m in miss)
     print("rules self-check passed")

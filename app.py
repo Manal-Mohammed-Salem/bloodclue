@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from rules import CBC, IRON, TESTS, analyse, has, ref_range
+from rules import CBC, IRON, TESTS, analyse, has, ref_range, status
 
 HERE = Path(__file__).parent
 COLOURS = {"Low": ("#C77700", "#FFF4E0"), "High": ("#D7263D", "#FDECEE"),
@@ -17,7 +17,8 @@ st.logo(str(HERE / "assets" / "logo.png"), size="large")
 
 
 def clean(row):
-    return {k: (None if pd.isna(v) else v) for k, v in row.items()}
+    return {k: (None if pd.isna(v) else int(v) if isinstance(v, float) and v.is_integer() else v)
+            for k, v in row.items()}
 
 
 @st.cache_data
@@ -31,15 +32,23 @@ with st.sidebar:
     uploaded = st.file_uploader("Upload results (CSV)", type="csv",
                                 help="Same columns as the sample file. In the pilot, results arrive from the lab automatically.")
     df = pd.read_csv(uploaded, dtype={"patient_id": str}) if uploaded else load_samples()
-    pid = st.selectbox("Patient", df["patient_id"])
+    pid = st.selectbox("Patient", df["patient_id"].unique())
+    visits = df[df["patient_id"] == pid]
+    if "date" in visits:
+        visits = visits.sort_values("date")
+    dates = list(visits["date"]) if "date" in visits else [None]
+    idx = len(dates) - 1
+    if len(dates) > 1:
+        idx = dates.index(st.selectbox("Result date", dates, index=idx))
     st.download_button("Download sample CSV", (HERE / "sample_patients.csv").read_bytes(),
                        "bloodclue_sample.csv", "text/csv")
-    st.caption("Prototype with synthetic patients. Not for clinical use.")
+    st.caption("Prototype with synthetic or de-identified patients. Not for clinical use.")
 
-p = clean(df[df["patient_id"] == pid].iloc[0].to_dict())
+rows_ = [clean(r) for r in visits.to_dict("records")]
+p, history = rows_[idx], rows_[:idx]
 sex = "M" if str(p.get("sex", "F")).upper().startswith("M") else "F"
 p["sex"] = sex
-statuses, patterns, missing = analyse(p)
+statuses, patterns, missing = analyse(p, history)
 
 st.title("BloodClue")
 st.caption("Every value coloured, every clue connected. The doctor decides.")
@@ -49,7 +58,7 @@ left, right = st.columns([1, 1.15], gap="large")
 # ---------- left: patient + colour-coded results ----------
 with left:
     with st.container(border=True):
-        st.subheader(f"Patient {pid}")
+        st.subheader(f"Patient {pid}" + (f" · {p['date']}" if p.get("date") else ""))
         a, b, c = st.columns(3)
         a.metric("Sex", sex)
         b.metric("Age", p.get("age") or "–")
@@ -72,6 +81,20 @@ with left:
             st.markdown(f"**{group}**")
             st.dataframe(pd.DataFrame(rows).style.apply(paint, axis=1), hide_index=True, width="stretch",
                          height=35 * len(rows) + 38)
+
+    if len(rows_) > 1:  # results over time, for every test measured at least twice
+        with st.container(border=True):
+            st.subheader("Results over time")
+            keys = [k for k in CBC + IRON if sum(has(r.get(k)) for r in rows_) >= 2]
+            trend = pd.DataFrame({r["date"]: [r.get(k) if has(r.get(k)) else None for k in keys] for r in rows_},
+                                 index=[TESTS[k][0] for k in keys])
+
+            def mark(col):
+                return ["color:{};font-weight:700".format(COLOURS[status(k, v, sex)][0]) if has(v) else ""
+                        for k, v in zip(keys, col)]
+
+            st.dataframe(trend.style.apply(mark, axis=0).format(lambda v: "–" if pd.isna(v) else f"{v:g}"),
+                         width="stretch")
 
 # ---------- right: the summary ----------
 with right:
