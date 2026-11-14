@@ -1,12 +1,14 @@
-"""BloodClue prototype: colour-coded CBC + iron results with an explainable summary.
+"""BloodClue prototype: colour-coded CBC + iron results, an explainable summary, the patient's full history
+in one place, and a (demo) ranking of contributing doctors.
 Run locally: streamlit run app.py
 """
 from pathlib import Path
+from urllib.parse import quote_plus
 
 import pandas as pd
 import streamlit as st
 
-from rules import CBC, IRON, TESTS, analyse, has, ref_range, status
+from rules import CBC, IRON, TESTS, analyse, has, ref_range, status, summarize_history
 
 HERE = Path(__file__).parent
 COLOURS = {"Low": ("#C77700", "#FFF4E0"), "High": ("#D7263D", "#FDECEE"),
@@ -22,8 +24,8 @@ def clean(row):
 
 
 @st.cache_data
-def load_samples():
-    return pd.read_csv(HERE / "sample_patients.csv", dtype={"patient_id": str})
+def load_csv(name):
+    return pd.read_csv(HERE / name, dtype={"patient_id": str})
 
 
 # ---------- sidebar: choose or upload results ----------
@@ -31,7 +33,7 @@ with st.sidebar:
     st.header("Lab results")
     uploaded = st.file_uploader("Upload results (CSV)", type="csv",
                                 help="Same columns as the sample file. In the pilot, results arrive from the lab automatically.")
-    df = pd.read_csv(uploaded, dtype={"patient_id": str}) if uploaded else load_samples()
+    df = pd.read_csv(uploaded, dtype={"patient_id": str}) if uploaded else load_csv("sample_patients.csv")
     pid = st.selectbox("Patient", df["patient_id"].unique())
     visits = df[df["patient_id"] == pid]
     if "date" in visits:
@@ -45,46 +47,92 @@ with st.sidebar:
     st.caption("Prototype with synthetic or de-identified patients. Not for clinical use.")
 
 rows_ = [clean(r) for r in visits.to_dict("records")]
+for r in rows_:
+    r["sex"] = "M" if str(r.get("sex", "F")).upper().startswith("M") else "F"
 p, history = rows_[idx], rows_[:idx]
-sex = "M" if str(p.get("sex", "F")).upper().startswith("M") else "F"
-p["sex"] = sex
+sex = p["sex"]
 statuses, patterns, missing = analyse(p, history)
 
 st.title("BloodClue")
-st.caption("Every value coloured, every clue connected. The doctor decides.")
+st.caption("One place for every result. Every value coloured, every clue connected. The doctor decides.")
 
-left, right = st.columns([1, 1.15], gap="large")
+tab_doc, tab_hist, tab_rank = st.tabs(["🩺 Doctor view", "🗂️ Patient history", "🏅 Doctor ranking"])
 
-# ---------- left: patient + colour-coded results ----------
-with left:
-    with st.container(border=True):
-        st.subheader(f"Patient {pid}" + (f" · {p['date']}" if p.get("date") else ""))
-        a, b, c = st.columns(3)
-        a.metric("Sex", sex)
-        b.metric("Age", p.get("age") or "–")
-        c.metric("Pregnant", p.get("pregnant") or "–")
-        st.write(f"**Symptoms:** {p.get('symptoms') or '–'}")
-        st.success("Imported from the lab. Nothing typed.", icon="✅")
-
-        def paint(row):
-            fg, bg = COLOURS[row["Status"]]
-            return ["", f"color:{fg};font-weight:700", "", f"color:{fg};background-color:{bg};font-weight:700"]
-
-        for group, keys in (("Complete blood count", CBC), ("Iron studies", IRON)):
-            rows = []
-            for k in keys:
-                label, unit, _ = TESTS[k]
-                lo, hi = ref_range(k, sex)
-                val = p.get(k)
-                rows.append({"Test": label, "Result": f"{val:g} {unit}" if has(val) else "–",
-                             "Reference": f"{lo:g} – {hi:g}", "Status": statuses[k]})
-            st.markdown(f"**{group}**")
-            st.dataframe(pd.DataFrame(rows).style.apply(paint, axis=1), hide_index=True, width="stretch",
-                         height=35 * len(rows) + 38)
-
-    if len(rows_) > 1:  # results over time, for every test measured at least twice
+# ---------- tab 1: doctor view ----------
+with tab_doc:
+    left, right = st.columns([1, 1.15], gap="large")
+    with left:
         with st.container(border=True):
-            st.subheader("Results over time")
+            st.subheader(f"Patient {pid}" + (f" · {p['date']}" if p.get("date") else ""))
+            a, b, c = st.columns(3)
+            a.metric("Sex", sex)
+            b.metric("Age", p.get("age") or "–")
+            c.metric("Pregnant", p.get("pregnant") or "–")
+            st.write(f"**Symptoms:** {p.get('symptoms') or '–'}")
+            st.success("Imported from the lab. Nothing typed.", icon="✅")
+
+            def paint(row):
+                fg, bg = COLOURS[row["Status"]]
+                return ["", f"color:{fg};font-weight:700", "", f"color:{fg};background-color:{bg};font-weight:700"]
+
+            for group, keys in (("Complete blood count", CBC), ("Iron studies", IRON)):
+                rows = []
+                for k in keys:
+                    label, unit, _ = TESTS[k]
+                    lo, hi = ref_range(k, sex)
+                    val = p.get(k)
+                    rows.append({"Test": label, "Result": f"{val:g} {unit}" if has(val) else "–",
+                                 "Reference": f"{lo:g} – {hi:g}", "Status": statuses[k]})
+                st.markdown(f"**{group}**")
+                st.dataframe(pd.DataFrame(rows).style.apply(paint, axis=1), hide_index=True, width="stretch",
+                             height=35 * len(rows) + 38)
+
+    with right:
+        outside = sum(1 for k in CBC + IRON if statuses[k] in ("Low", "High"))
+        measured = sum(1 for k in CBC + IRON if statuses[k] != "Missing")
+        st.subheader(f"Summary · {outside} of {measured} values outside range")
+        if not patterns:
+            st.info("No pattern from the current rules. Review the values above.")
+        for i, pat in enumerate(patterns, 1):
+            with st.container(border=True):
+                st.markdown(f"#### {i}. {pat['title']}")
+                st.markdown("**Supports:** " + " · ".join(pat["supports"]))
+                if pat["against"]:
+                    st.markdown("**Does not fit:** " + " · ".join(pat["against"]))
+                st.markdown("**Ask the patient:** " + " · ".join(pat["ask"]))
+                st.caption(f"Rule {pat['rule']}: {pat['rule_text']} Status: draft, awaiting clinical sign-off.")
+        if missing:
+            st.warning("**Missing before a confident reading:** " + " · ".join(missing))
+        st.markdown("**BloodClue does not diagnose. The doctor reviews and decides.**")
+
+# ---------- tab 2: the patient's whole story, so it is never retold ----------
+with tab_hist:
+    st.subheader(f"Everything the doctor should know about {pid}, in one page")
+    st.caption("Built automatically from every visit (prototype: rule-based; an AI-written version comes later). "
+               "The patient doesn't have to repeat their story at each visit.")
+    s = summarize_history(rows_)
+    c1, c2 = st.columns(2, gap="large")
+    with c1:
+        with st.container(border=True):
+            st.markdown("#### Overview")
+            for line in s["overview"]:
+                st.markdown(f"- {line}")
+            st.markdown("#### Found more than once")
+            for line in s["repeated"] or ["Nothing out of range on more than one date."]:
+                st.markdown(f"- {line}")
+            st.markdown("#### Symptoms reported")
+            st.markdown(", ".join(s["symptoms"]) or "–")
+            st.markdown("#### Treatments recorded")
+            for line in s["treatments"] or ["None recorded."]:
+                st.markdown(f"- {line}")
+    with c2:
+        with st.container(border=True):
+            st.markdown("#### Visit by visit")
+            for line in s["timeline"]:
+                st.markdown(f"- {line}")
+    if len(rows_) > 1:
+        with st.container(border=True):
+            st.markdown("#### Results over time")
             keys = [k for k in CBC + IRON if sum(has(r.get(k)) for r in rows_) >= 2]
             trend = pd.DataFrame({r["date"]: [r.get(k) if has(r.get(k)) else None for k in keys] for r in rows_},
                                  index=[TESTS[k][0] for k in keys])
@@ -96,32 +144,27 @@ with left:
             st.dataframe(trend.style.apply(mark, axis=0).format(lambda v: "–" if pd.isna(v) else f"{v:g}"),
                          width="stretch")
 
-# ---------- right: the summary ----------
-with right:
-    outside = sum(1 for k in CBC + IRON if statuses[k] in ("Low", "High"))
-    measured = sum(1 for k in CBC + IRON if statuses[k] != "Missing")
-    st.subheader(f"Summary · {outside} of {measured} values outside range")
-
-    if not patterns:
-        st.info("No pattern from the current rules. Review the values above.")
-    for i, pat in enumerate(patterns, 1):
-        with st.container(border=True):
-            st.markdown(f"#### {i}. {pat['title']}")
-            st.markdown("**Supports:** " + " · ".join(pat["supports"]))
-            if pat["against"]:
-                st.markdown("**Does not fit:** " + " · ".join(pat["against"]))
-            st.markdown("**Ask the patient:** " + " · ".join(pat["ask"]))
-            st.caption(f"Rule {pat['rule']}: {pat['rule_text']} Status: draft, awaiting clinical sign-off.")
-
-    if missing:
-        st.warning("**Missing before a confident reading:** " + " · ".join(missing))
-
-    st.markdown("**BloodClue does not diagnose. The doctor reviews and decides.**")
-
-    with st.expander("Pilot feedback"):
-        st.write("Was this summary useful for this patient?")
-        if st.feedback("thumbs", key=f"fb-{pid}") is not None:
-            st.caption("Thank you. (Prototype: feedback is not stored yet.)")
+# ---------- tab 3: contributing doctors (demo data) ----------
+with tab_rank:
+    st.subheader("Doctors who teach BloodClue")
+    st.warning("**Demo data.** These are not real doctors or clinics; the real ranking will come from accepted, "
+               "reviewed rules.", icon="⚠️")
+    docs = load_csv("doctors.csv").sort_values(["accepted_rules", "reviews_given"], ascending=False)
+    docs.insert(0, "Rank", range(1, len(docs) + 1))
+    docs["Map"] = ["https://www.google.com/maps/search/" + quote_plus(f"{r.clinic} {r.area} {r.city}")
+                   for r in docs.itertuples()]
+    st.dataframe(
+        docs[["Rank", "name", "specialty", "clinic", "area", "city", "accepted_rules", "reviews_given", "badge", "Map"]],
+        hide_index=True, width="stretch",
+        column_config={
+            "name": "Doctor", "specialty": "Specialty", "clinic": "Clinic", "area": "Area", "city": "City",
+            "accepted_rules": st.column_config.ProgressColumn("Accepted rules", min_value=0,
+                                                              max_value=int(docs["accepted_rules"].max()), format="%d"),
+            "reviews_given": "Reviews", "badge": "Badge",
+            "Map": st.column_config.LinkColumn("Find the clinic", display_text="Open map"),
+        })
+    st.caption("A rule only counts after clinical review; votes alone never change the system.")
 
 st.divider()
-st.caption("BloodClue prototype v0.1 · synthetic data · reference ranges vary by laboratory · not for clinical use.")
+st.caption("BloodClue prototype v0.2 · synthetic and de-identified data · reference ranges vary by laboratory · "
+           "not for clinical use.")

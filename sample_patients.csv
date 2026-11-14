@@ -8,5 +8,5 @@ G-7001,2026-04-01,F,22,"dizziness, tiredness, cold feet, poor appetite",no,12.9,
 G-7001,2026-07-10,F,22,"fever, sore throat",no,12.2,3.9,88,12.1,13.8,11.2,0.2,210,,,,,31,,
 G-7001,2026-07-20,F,22,"feeling better",no,12.5,4.0,90,12.0,7.0,1.6,0.88,300,240,,,29,,,IV iron (4 doses)
 CASE-21F,2026-04-28,F,21,"dizziness, tiredness, muscle and joint pain, cold feet, poor appetite, poor sleep",no,13.13,4.22,91.2,13,5.38,1.04,0.96,251.7,23.44,,,,,,
-CASE-21F,2026-08-03,F,21,emergency visit,no,12.1,3.91,87.5,12,14.1,11.65,0.23,201,,,,,29.9,,
-CASE-21F,2026-08-08,F,21,follow-up after IV iron,no,12.4,4.05,90.9,12,7.11,1.54,0.93,306,235,78.2,275.3,28.4,,,IV iron (course in progress)
+CASE-21F,2026-08-03,F,21,,no,12.1,3.91,87.5,12,14.1,11.65,0.23,201,,,,,29.9,,
+CASE-21F,2026-08-08,F,21,,no,12.4,4.05,90.9,12,7.11,1.54,0.93,306,235,78.2,275.3,28.4,,,IV iron (course in progress)

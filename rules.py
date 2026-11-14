@@ -146,6 +146,37 @@ def analyse(p, history=()):
     return st, patterns, missing
 
 
+def summarize_history(visits):
+    """One summary of every visit, so the patient never has to retell their story.
+    visits: list of result dicts (oldest first) with optional date, symptoms, medicines. Returns dict of bullet lists."""
+    if not visits:
+        return {}
+    sex = visits[-1].get("sex", "F")
+    dates = [str(v.get("date") or f"visit {i + 1}") for i, v in enumerate(visits)]
+    flags = {}  # test -> [(date, value, status)]
+    timeline = []
+    for i, (d, v) in enumerate(zip(dates, visits)):
+        st, pats, _ = analyse(v, visits[:i])
+        out = [f"{TESTS[k][0]} {v[k]:g} ({s.lower()})" for k, s in st.items() if s in ("Low", "High")]
+        for k, s in st.items():
+            if s in ("Low", "High"):
+                flags.setdefault(k, []).append((d, v[k], s))
+        timeline.append(f"{d}: " + ("; ".join(out) if out else "all measured values in range")
+                        + (f". Clues: {', '.join(p['title'] for p in pats)}" if pats else ""))
+    repeated = [f"{TESTS[k][0]} out of range on {len(x)} dates ("
+                + ", ".join(f"{d}: {val:g} {s.lower()}" for d, val, s in x) + ")"
+                for k, x in flags.items() if len(x) >= 2]
+    seen = []
+    for v in visits:
+        for part in str(v.get("symptoms") or "").split(","):
+            part = part.strip()
+            if part and part not in seen:
+                seen.append(part)
+    treatments = [f"{d}: {v['medicines']}" for d, v in zip(dates, visits) if v.get("medicines") and v["medicines"] != "none"]
+    return {"overview": [f"{len(visits)} lab visits from {dates[0]} to {dates[-1]}."],
+            "repeated": repeated, "symptoms": seen, "treatments": treatments, "timeline": timeline}
+
+
 if __name__ == "__main__":  # self-check: python rules.py
     st, pats, miss = analyse({"sex": "F", "hb": 12.6, "rbc": 4.4, "mcv": 81, "rdw": 15.4, "wbc": 6.8, "plt": 310,
                               "ferritin": 10, "iron": 45, "tibc": 430, "tsat": 10})
@@ -169,4 +200,12 @@ if __name__ == "__main__":  # self-check: python rules.py
     assert [x["rule"] for x in pats] == ["IRON-05", "WBC-01"], pats
     assert "repeated" in pats[1]["title"] and "2026-04-28" in pats[1]["supports"][1]
     assert not any("Previous results" in m for m in miss)
+    # history summary: eosinophils high on 2 of 3 dates -> listed as repeated; symptoms merged; treatment kept
+    s = summarize_history([{"date": "d1", "sex": "F", "eos": 0.96, "ferritin": 23, "symptoms": "dizziness, tiredness"},
+                           {"date": "d2", "sex": "F", "eos": 0.23, "crp": 29.9, "symptoms": "fever"},
+                           {"date": "d3", "sex": "F", "eos": 0.93, "ferritin": 235, "medicines": "IV iron"}])
+    assert len(s["repeated"]) == 1 and s["repeated"][0].startswith("Eosinophils out of range on 2 dates")
+    assert s["symptoms"] == ["dizziness", "tiredness", "fever"] and s["treatments"] == ["d3: IV iron"]
+    assert len(s["timeline"]) == 3 and "IRON-04" not in s["timeline"][0] and "Low-normal ferritin" in s["timeline"][0]
+    assert summarize_history([]) == {}
     print("rules self-check passed")
