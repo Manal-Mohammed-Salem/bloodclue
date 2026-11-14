@@ -1,12 +1,12 @@
-patient_id,date,sex,age,symptoms,pregnant,hb,rbc,mcv,rdw,wbc,neut,eos,plt,ferritin,iron,tibc,tsat,crp,previous,medicines
-A-1027,2026-11-14,F,34,"tiredness, hair loss, poor focus",no,12.6,4.4,81,15.4,6.8,,,310,10,45,430,10,,,
-B-2041,2026-11-14,F,41,"dizziness, heavy periods",no,10.1,4.0,72,17.2,7.1,,,420,6,30,460,6,2,"Hb 11.2 (2025)",none
-C-3310,2026-11-14,M,28,routine check,,13.0,6.1,66,13.8,6.0,,,250,90,95,300,30,1,,none
-D-4102,2026-11-14,M,52,"headaches, smoker",,18.2,6.0,90,13.0,8.0,,,260,120,110,320,34,3,"Hb 17.9 (2025)",
-E-5208,2026-11-14,F,60,"joint pain, tiredness",no,11.5,4.1,82,14.0,9.5,,,380,85,40,260,12,24,,ibuprofen
-G-7001,2026-04-01,F,22,"dizziness, tiredness, cold feet, poor appetite",no,12.9,4.2,90,13.1,5.4,1.1,0.9,250,21,,,,,,
-G-7001,2026-07-10,F,22,"fever, sore throat",no,12.2,3.9,88,12.1,13.8,11.2,0.2,210,,,,,31,,
-G-7001,2026-07-20,F,22,"feeling better",no,12.5,4.0,90,12.0,7.0,1.6,0.88,300,240,,,29,,,IV iron (4 doses)
-CASE-21F,2026-04-28,F,21,"dizziness, tiredness, muscle and joint pain, cold feet, poor appetite, poor sleep",no,13.13,4.22,91.2,13,5.38,1.04,0.96,251.7,23.44,,,,,,
-CASE-21F,2026-08-03,F,21,,no,12.1,3.91,87.5,12,14.1,11.65,0.23,201,,,,,29.9,,
-CASE-21F,2026-08-08,F,21,,no,12.4,4.05,90.9,12,7.11,1.54,0.93,306,235,78.2,275.3,28.4,,,IV iron (course in progress)
+patient_id,date,sex,age,symptoms,pregnant,hb,rbc,mcv,rdw,wbc,neut,eos,plt,ferritin,iron,tibc,tsat,crp,previous,medicines,b12,vitd,tsh,mg
+A-1027,2026-11-14,F,34,"tiredness, hair loss, poor focus, tingling hands",no,12.6,4.4,81,15.4,6.8,,,310,10,45,430,10,,,,180,,,
+B-2041,2026-11-14,F,41,"dizziness, heavy periods",no,10.1,4.0,72,17.2,7.1,,,420,6,30,460,6,2,Hb 11.2 (2025),none,,,,
+C-3310,2026-11-14,M,28,routine check,,13.0,6.1,66,13.8,6.0,,,250,90,95,300,30,1,,none,,,,
+D-4102,2026-11-14,M,52,"headaches, smoker",,18.2,6.0,90,13.0,8.0,,,260,120,110,320,34,3,Hb 17.9 (2025),,,,,
+E-5208,2026-11-14,F,60,"joint pain, tiredness",no,11.5,4.1,82,14.0,9.5,,,380,85,40,260,12,24,,ibuprofen,,,,
+G-7001,2026-04-01,F,22,"dizziness, tiredness, cold feet, poor appetite",no,12.9,4.2,90,13.1,5.4,1.1,0.9,250,21,,,,,,,,,,
+G-7001,2026-07-10,F,22,"fever, sore throat",no,12.2,3.9,88,12.1,13.8,11.2,0.2,210,,,,,31,,,,,,
+G-7001,2026-07-20,F,22,feeling better,no,12.5,4.0,90,12.0,7.0,1.6,0.88,300,240,,,29,,,IV iron (4 doses),,,,
+CASE-21F,2026-04-28,F,21,"dizziness, tiredness, muscle and joint pain, cold feet, poor appetite, poor sleep",no,13.13,4.22,91.2,13,5.38,1.04,0.96,251.7,23.44,,,,,,,505.5,65.53,2.03,2.09
+CASE-21F,2026-08-03,F,21,,no,12.1,3.91,87.5,12,14.1,11.65,0.23,201,,,,,29.9,,,,,,
+CASE-21F,2026-08-08,F,21,,no,12.4,4.05,90.9,12,7.11,1.54,0.93,306,235,78.2,275.3,28.4,,,IV iron (course in progress),,,,

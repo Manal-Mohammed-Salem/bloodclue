@@ -8,7 +8,8 @@ from urllib.parse import quote_plus
 import pandas as pd
 import streamlit as st
 
-from rules import CBC, IRON, TESTS, analyse, has, ref_range, status, summarize_history
+from rules import (CBC, IRON, OTHER, SYMPTOM_LINKS, TESTS, analyse, has, preselect_symptoms, ref_range, status,
+                   summarize_history, symptom_clues)
 
 HERE = Path(__file__).parent
 COLOURS = {"Low": ("#C77700", "#FFF4E0"), "High": ("#D7263D", "#FDECEE"),
@@ -76,7 +77,10 @@ with tab_doc:
                 fg, bg = COLOURS[row["Status"]]
                 return ["", f"color:{fg};font-weight:700", "", f"color:{fg};background-color:{bg};font-weight:700"]
 
-            for group, keys in (("Complete blood count", CBC), ("Iron studies", IRON)):
+            groups = [("Complete blood count", CBC), ("Iron studies", IRON)]
+            if any(has(p.get(k)) for k in OTHER):
+                groups.append(("Vitamins, thyroid and minerals", OTHER))
+            for group, keys in groups:
                 rows = []
                 for k in keys:
                     label, unit, _ = TESTS[k]
@@ -89,6 +93,26 @@ with tab_doc:
                              height=35 * len(rows) + 38)
 
     with right:
+        # ---- symptoms -> possible causes, in violet, checked against the results ----
+        with st.container(border=True):
+            st.subheader(":violet[Symptom clues]")
+            chosen = st.multiselect("Symptoms (pre-filled from the patient's file; add or remove)",
+                                    list(SYMPTOM_LINKS), default=preselect_symptoms(p.get("symptoms")),
+                                    key=f"sym-{pid}-{idx}")
+            badge = {"supported": ":violet-badge[Supported by results]",
+                     "test suggested": ":orange-badge[Not tested: worth testing]",
+                     "ask": ":blue-badge[Ask the patient]",
+                     "not supported": ":gray-badge[Not supported by results]"}
+            clues = symptom_clues(chosen, p)
+            if not chosen:
+                st.caption("Pick a symptom to see what it might come from.")
+            for c in clues:
+                st.markdown(f":violet[**{c['cause']}**] {badge[c['evidence']]}  \n"
+                            f"<small>From: {', '.join(c['symptoms'])} · {c['detail']}</small>",
+                            unsafe_allow_html=True)
+            if clues:
+                st.caption("Possible links only, to guide which tests and questions to consider. Not a diagnosis.")
+
         outside = sum(1 for k in CBC + IRON if statuses[k] in ("Low", "High"))
         measured = sum(1 for k in CBC + IRON if statuses[k] != "Missing")
         st.subheader(f"Summary · {outside} of {measured} values outside range")

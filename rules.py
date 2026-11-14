@@ -20,11 +20,48 @@ TESTS = {
     "tibc":     ("TIBC", "µg/dL", (250, 400)),
     "tsat":     ("Transferrin saturation", "%", (20, 50)),
     "crp":      ("CRP", "mg/L", (0, 5)),
+    "b12":      ("Vitamin B12", "pg/mL", (211, 946)),
+    "vitd":     ("Vitamin D", "ng/mL", (30, 100)),
+    "tsh":      ("TSH", "µIU/mL", (0.27, 4.2)),
+    "mg":       ("Magnesium", "mg/dL", (1.6, 2.6)),
 }
 CBC = ["hb", "rbc", "mcv", "rdw", "wbc", "neut", "eos", "plt"]
-OPTIONAL = {"crp", "neut", "eos"}  # not flagged as missing when absent
-SYMPTOMS = ("tired", "fatigue", "dizz", "hair loss", "poor focus", "headache", "weak", "cold")
 IRON = ["ferritin", "iron", "tibc", "tsat", "crp"]
+OTHER = ["b12", "vitd", "tsh", "mg"]
+OPTIONAL = {"crp", "neut", "eos"} | set(OTHER)  # not flagged as missing when absent
+SYMPTOMS = ("tired", "fatigue", "dizz", "hair loss", "poor focus", "headache", "weak", "cold")
+
+# Symptom -> possible causes a blood test (or one question) can check: (cause, lab key or None, direction that fits)
+SYMPTOM_LINKS = {
+    "Tingling or numb hands/feet": [("Vitamin B12 deficiency", "b12", "Low"), ("Low magnesium", "mg", "Low")],
+    "Tiredness / low energy": [("Iron deficiency", "ferritin", "Low"), ("Anaemia", "hb", "Low"),
+                               ("Vitamin B12 deficiency", "b12", "Low"), ("Vitamin D deficiency", "vitd", "Low"),
+                               ("Underactive thyroid", "tsh", "High")],
+    "Dizziness": [("Anaemia", "hb", "Low"), ("Iron deficiency", "ferritin", "Low"), ("Dehydration", None, None)],
+    "Headache": [("Dehydration", None, None), ("Iron deficiency", "ferritin", "Low")],
+    "Hair loss": [("Iron deficiency", "ferritin", "Low"), ("Thyroid problem", "tsh", "High"),
+                  ("Vitamin D deficiency", "vitd", "Low")],
+    "Poor focus / forgetfulness": [("Iron deficiency", "ferritin", "Low"), ("Vitamin B12 deficiency", "b12", "Low")],
+    "Cold hands or feet": [("Iron deficiency", "ferritin", "Low"), ("Underactive thyroid", "tsh", "High")],
+    "Palpitations": [("Anaemia", "hb", "Low"), ("Iron deficiency", "ferritin", "Low"),
+                     ("Overactive thyroid", "tsh", "Low")],
+    "Breathless on stairs": [("Anaemia", "hb", "Low"), ("Iron deficiency", "ferritin", "Low")],
+    "Pale skin / dark circles": [("Anaemia", "hb", "Low"), ("Iron deficiency", "ferritin", "Low")],
+    "Restless legs at night": [("Iron deficiency", "ferritin", "Low"), ("Low magnesium", "mg", "Low")],
+    "Craving ice or clay (pica)": [("Iron deficiency", "ferritin", "Low")],
+    "Brittle nails": [("Iron deficiency", "ferritin", "Low")],
+    "Sore tongue / mouth ulcers": [("Vitamin B12 deficiency", "b12", "Low"), ("Iron deficiency", "ferritin", "Low")],
+    "Muscle cramps or aches": [("Vitamin D deficiency", "vitd", "Low"), ("Low magnesium", "mg", "Low"),
+                               ("Dehydration", None, None)],
+    "Thirst, dry mouth, dark urine": [("Dehydration", None, None)],
+}
+# words in a free-text symptom field that pre-select a symptom above
+SYMPTOM_WORDS = {"tingl": "Tingling or numb hands/feet", "numb": "Tingling or numb hands/feet",
+                 "tired": "Tiredness / low energy", "fatigue": "Tiredness / low energy", "dizz": "Dizziness",
+                 "headache": "Headache", "hair loss": "Hair loss", "focus": "Poor focus / forgetfulness",
+                 "cold": "Cold hands or feet", "palpitation": "Palpitations", "restless": "Restless legs at night",
+                 "muscle": "Muscle cramps or aches", "cramp": "Muscle cramps or aches",
+                 "thirst": "Thirst, dry mouth, dark urine"}
 
 
 def has(v):
@@ -146,6 +183,40 @@ def analyse(p, history=()):
     return st, patterns, missing
 
 
+def preselect_symptoms(text):
+    text = str(text or "").lower()
+    return list(dict.fromkeys(s for w, s in SYMPTOM_WORDS.items() if w in text))
+
+
+def symptom_clues(selected, p):
+    """Group the selected symptoms by possible cause and check each cause against the patient's results.
+    evidence: 'supported' | 'test suggested' | 'ask' | 'not supported'."""
+    sex = p.get("sex", "F")
+    causes = {}
+    for sym in selected:
+        for cause, key, direction in SYMPTOM_LINKS.get(sym, []):
+            c = causes.setdefault(cause, {"cause": cause, "symptoms": [], "key": key, "direction": direction})
+            c["symptoms"].append(sym)
+    order = {"supported": 0, "test suggested": 1, "ask": 2, "not supported": 3}
+    for c in causes.values():
+        key = c["key"]
+        if key is None:  # dehydration: no single lab, but a concentrated blood count can hint at it
+            if status("hb", p.get("hb"), sex) == "High":
+                c["evidence"], c["detail"] = "supported", f"Haemoglobin {p['hb']:g} is high, which can mean concentrated blood"
+            else:
+                c["evidence"], c["detail"] = "ask", "Ask how much water they drink each day"
+            continue
+        s = status(key, p.get(key), sex)
+        label = TESTS[key][0]
+        if s == "Missing":
+            c["evidence"], c["detail"] = "test suggested", f"{label} not measured: worth testing"
+        elif s == c["direction"]:
+            c["evidence"], c["detail"] = "supported", f"{label} {p[key]:g} is {s.lower()}"
+        else:
+            c["evidence"], c["detail"] = "not supported", f"{label} {p[key]:g} is {s.lower()}"
+    return sorted(causes.values(), key=lambda c: (order[c["evidence"]], -len(c["symptoms"])))
+
+
 def summarize_history(visits):
     """One summary of every visit, so the patient never has to retell their story.
     visits: list of result dicts (oldest first) with optional date, symptoms, medicines. Returns dict of bullet lists."""
@@ -208,4 +279,15 @@ if __name__ == "__main__":  # self-check: python rules.py
     assert s["symptoms"] == ["dizziness", "tiredness", "fever"] and s["treatments"] == ["d3: IV iron"]
     assert len(s["timeline"]) == 3 and "IRON-04" not in s["timeline"][0] and "Low-normal ferritin" in s["timeline"][0]
     assert summarize_history([]) == {}
+    # symptom clues: tingling + tiredness with low ferritin, normal B12, no vitamin D measured
+    clues = symptom_clues(["Tingling or numb hands/feet", "Tiredness / low energy", "Headache"],
+                          {"sex": "F", "ferritin": 10, "b12": 505, "hb": 12.6})
+    ev = {c["cause"]: c["evidence"] for c in clues}
+    assert ev["Iron deficiency"] == "supported" and ev["Vitamin B12 deficiency"] == "not supported"
+    assert ev["Vitamin D deficiency"] == "test suggested" and ev["Dehydration"] == "ask"
+    assert clues[0]["evidence"] == "supported" and clues[-1]["evidence"] == "not supported"
+    assert next(c for c in clues if c["cause"] == "Vitamin B12 deficiency")["symptoms"] == [
+        "Tingling or numb hands/feet", "Tiredness / low energy"]
+    assert preselect_symptoms("Dizziness, tiredness, cold feet") == ["Tiredness / low energy", "Dizziness",
+                                                                      "Cold hands or feet"]
     print("rules self-check passed")
