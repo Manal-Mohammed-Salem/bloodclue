@@ -37,9 +37,28 @@ def load_csv(name):
 # ---------- sidebar: choose or upload results ----------
 with st.sidebar:
     st.header("Lab results")
-    uploaded = st.file_uploader("Upload results (CSV)", type="csv",
-                                help="Same columns as the sample file. In the pilot, results arrive from the lab automatically.")
-    df = pd.read_csv(uploaded, dtype={"patient_id": str}) if uploaded else load_csv("sample_patients.csv")
+    uploads = st.file_uploader("Upload lab reports (PDF) or results (CSV)", type=["pdf", "csv"],
+                               accept_multiple_files=True,
+                               help="Several PDFs of the same patient become a timeline. Only results, date, age and sex "
+                                    "are read; names and ID numbers are ignored and nothing is stored. "
+                                    "In the pilot, results arrive from the lab automatically.")
+    pdfs = [u for u in uploads if u.name.lower().endswith(".pdf")]
+    csvs = [u for u in uploads if u.name.lower().endswith(".csv")]
+    if pdfs:
+        from lab_pdf import parse_pdf
+        parsed = [parse_pdf(u.getvalue()) for u in pdfs]
+        empty = [u.name for u, r in zip(pdfs, parsed) if not any(k in r for k in TESTS)]
+        if empty:
+            st.error(f"No results found in {', '.join(empty)}. Scanned or photographed reports aren't supported yet; "
+                     "upload the PDF from the lab or patient portal.")
+        if not any(r.get("sex") for r in parsed):
+            pdf_sex = st.radio("Patient sex (not printed on the report)", ["F", "M"], horizontal=True)
+        df = pd.DataFrame([{"patient_id": "Uploaded report", "sex": r.get("sex") or pdf_sex, **r}
+                           for r in parsed if any(k in r for k in TESTS)] or [{"patient_id": "Uploaded report"}])
+    elif csvs:
+        df = pd.read_csv(csvs[0], dtype={"patient_id": str})
+    else:
+        df = load_csv("sample_patients.csv")
     pid = st.selectbox("Patient", df["patient_id"].unique())
     visits = df[df["patient_id"] == pid]
     if "date" in visits:
@@ -201,18 +220,16 @@ with tab_kb:
     kb = json.loads((HERE / "knowledge.json").read_text(encoding="utf-8"))
     st.subheader("What our clinical partner teaches")
     st.info(f"Drafted from {sum(e['videos'] for e in kb)} references in the educational videos of a Dubai "
-            "internal-medicine specialist, translated from Arabic. Every point awaits his sign-off before it becomes "
-            "a rule. Points with doses or uncertain numbers stay hidden until reviewed.")
+            "internal-medicine specialist, translated from Arabic by automatic transcription. Every point awaits his "
+            "sign-off before it becomes a rule. Points marked **Unreviewed draft** contain doses or numbers that may "
+            "have been misheard. Not medical advice.")
     kinds = {"lab_rule": "Lab", "symptom": "Symptom", "cause": "Cause", "treatment": "Treatment",
              "advice": "Advice", "myth": "Myth"}
     for e in kb:
-        shown = [x for x in e["points"] if not x["needs_review"]]
-        hidden = len(e["points"]) - len(shown)
         with st.expander(f"**{e['topic']}**, {e['videos']} videos"):
-            for x in shown:
-                st.markdown(f"- **{kinds.get(x['type'], 'Note')}.** {x['statement']}")
-            if hidden:
-                st.caption(f"{hidden} point(s) hidden until clinical review.")
+            for x in e["points"]:
+                flag = ":orange-badge[Unreviewed draft] " if x["needs_review"] else ""
+                st.markdown(f"- {flag}**{kinds.get(x['type'], 'Note')}.** {x['statement']}")
             if e["ask_patient"]:
                 st.markdown("**Questions to ask:** " + " ".join(e["ask_patient"]))
 
