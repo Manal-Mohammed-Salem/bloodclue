@@ -54,14 +54,37 @@ SYMPTOM_LINKS = {
     "Muscle cramps or aches": [("Vitamin D deficiency", "vitd", "Low"), ("Low magnesium", "mg", "Low"),
                                ("Dehydration", None, None)],
     "Thirst, dry mouth, dark urine": [("Dehydration", None, None)],
+    "Joint pain (knees, wrists, back)": [("Joint hypermobility", "beighton", "High"),
+                                         ("Vitamin D deficiency", "vitd", "Low")],
+    "Frequent sprains or dislocations": [("Joint hypermobility", "beighton", "High")],
 }
+
+# Beighton score: 9 bedside manoeuvres, one point each (Beighton 1973; 2017 hEDS criteria cut-offs)
+BEIGHTON = [
+    ("Little finger bends back beyond 90°", 2),   # left and right
+    ("Thumb touches the forearm", 2),
+    ("Elbow bends backwards more than 10°", 2),
+    ("Knee bends backwards more than 10°", 2),
+    ("Palms flat on the floor, knees straight", 1),
+]
+
+
+def beighton_cutoff(age):
+    """Generalised joint hypermobility: 6+ before puberty, 5+ for adults up to 50, 4+ over 50."""
+    try:
+        age = float(age)
+    except (TypeError, ValueError):
+        return 5
+    return 6 if age < 13 else 5 if age <= 50 else 4
 # words in a free-text symptom field that pre-select a symptom above
 SYMPTOM_WORDS = {"tingl": "Tingling or numb hands/feet", "numb": "Tingling or numb hands/feet",
                  "tired": "Tiredness / low energy", "fatigue": "Tiredness / low energy", "dizz": "Dizziness",
                  "headache": "Headache", "hair loss": "Hair loss", "focus": "Poor focus / forgetfulness",
                  "cold": "Cold hands or feet", "palpitation": "Palpitations", "restless": "Restless legs at night",
                  "muscle": "Muscle cramps or aches", "cramp": "Muscle cramps or aches",
-                 "thirst": "Thirst, dry mouth, dark urine"}
+                 "thirst": "Thirst, dry mouth, dark urine", "joint": "Joint pain (knees, wrists, back)",
+                 "knee": "Joint pain (knees, wrists, back)", "sprain": "Frequent sprains or dislocations",
+                 "disloc": "Frequent sprains or dislocations"}
 
 
 def has(v):
@@ -173,6 +196,20 @@ def analyse(p, history=()):
             "ask": ["Water intake?", "Smoking?", "Testosterone or other medicines?", "Previous results?"],
         })
 
+    # HYP-01: generalised joint hypermobility on the bedside test
+    score = p.get("beighton")
+    if score is not None and score >= beighton_cutoff(p.get("age")):
+        patterns.append({
+            "title": "Generalised joint hypermobility (possible)", "rule": "HYP-01",
+            "rule_text": f"Beighton score {score}/9 reaches the cut-off of {beighton_cutoff(p.get('age'))} for this age. "
+                         "Hypermobile joints can explain joint, knee and back pain.",
+            "supports": [f"Beighton score {score}/9"]
+                        + ([f"Symptoms: {p.get('symptoms')}"] if p.get("symptoms") else []),
+            "against": [],
+            "ask": ["Frequent sprains or dislocations?", "Family members who are very flexible?",
+                    "Dizziness on standing up?", "Skin that bruises easily or stretches?"],
+        })
+
     if has(v["ferritin"]) and not has(v["crp"]):
         missing.append("CRP (inflammation can hide low iron)")
     if not history and not p.get("previous"):
@@ -200,6 +237,15 @@ def symptom_clues(selected, p):
     order = {"supported": 0, "test suggested": 1, "ask": 2, "not supported": 3}
     for c in causes.values():
         key = c["key"]
+        if key == "beighton":  # bedside test, not a lab value
+            score = p.get("beighton")
+            if score is None:
+                c["evidence"], c["detail"] = "test suggested", "Do the Beighton test in the patient file"
+            elif score >= beighton_cutoff(p.get("age")):
+                c["evidence"], c["detail"] = "supported", f"Beighton score {score}/9"
+            else:
+                c["evidence"], c["detail"] = "not supported", f"Beighton score {score}/9"
+            continue
         if key is None:  # dehydration: no single lab, but a concentrated blood count can hint at it
             if status("hb", p.get("hb"), sex) == "High":
                 c["evidence"], c["detail"] = "supported", f"Haemoglobin {p['hb']:g} is high, which can mean concentrated blood"
@@ -212,6 +258,8 @@ def symptom_clues(selected, p):
             c["evidence"], c["detail"] = "test suggested", f"{label} not measured: worth testing"
         elif s == c["direction"]:
             c["evidence"], c["detail"] = "supported", f"{label} {p[key]:g} is {s.lower()}"
+        elif key == "ferritin" and p[key] < 30:  # same threshold as IRON-04
+            c["evidence"], c["detail"] = "supported", f"Ferritin {p[key]:g} is under 30 (low-normal)"
         else:
             c["evidence"], c["detail"] = "not supported", f"{label} {p[key]:g} is {s.lower()}"
     return sorted(causes.values(), key=lambda c: (order[c["evidence"]], -len(c["symptoms"])))
@@ -290,4 +338,15 @@ if __name__ == "__main__":  # self-check: python rules.py
         "Tingling or numb hands/feet", "Tiredness / low energy"]
     assert preselect_symptoms("Dizziness, tiredness, cold feet") == ["Tiredness / low energy", "Dizziness",
                                                                       "Cold hands or feet"]
+    # hypermobility: cut-off depends on age; joint pain links to it; HYP-01 fires only at/above the cut-off
+    assert (beighton_cutoff(10), beighton_cutoff(21), beighton_cutoff(60), beighton_cutoff(None)) == (6, 5, 4, 5)
+    ev = {c["cause"]: c["evidence"] for c in symptom_clues(["Joint pain (knees, wrists, back)"], {"age": 21})}
+    assert ev["Joint hypermobility"] == "test suggested"
+    ev = {c["cause"]: c["evidence"] for c in symptom_clues(["Joint pain (knees, wrists, back)"], {"age": 21, "beighton": 6})}
+    assert ev["Joint hypermobility"] == "supported"
+    assert [x["rule"] for x in analyse({"sex": "F", "age": 21, "beighton": 6})[1]] == ["HYP-01"]
+    assert analyse({"sex": "F", "age": 21, "beighton": 4})[1] == []
+    ev = {c["cause"]: c["evidence"] for c in symptom_clues(["Dizziness"], {"sex": "F", "ferritin": 23.4, "hb": 13.1})}
+    assert ev["Iron deficiency"] == "supported"  # low-normal ferritin agrees with IRON-04
+    assert preselect_symptoms("muscle and joint pain") == ["Muscle cramps or aches", "Joint pain (knees, wrists, back)"]
     print("rules self-check passed")
