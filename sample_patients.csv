@@ -1,0 +1,6 @@
+patient_id,sex,age,symptoms,pregnant,hb,rbc,mcv,rdw,wbc,plt,ferritin,iron,tibc,tsat,crp,previous,medicines
+A-1027,F,34,"tiredness, hair loss, poor focus",no,12.6,4.4,81,15.4,6.8,310,10,45,430,10,,,
+B-2041,F,41,"dizziness, heavy periods",no,10.1,4.0,72,17.2,7.1,420,6,30,460,6,2,"Hb 11.2 (2025)",none
+C-3310,M,28,routine check,,13.0,6.1,66,13.8,6.0,250,90,95,300,30,1,,none
+D-4102,M,52,"headaches, smoker",,18.2,6.0,90,13.0,8.0,260,120,110,320,34,3,"Hb 17.9 (2025)",
+E-5208,F,60,"joint pain, tiredness",no,11.5,4.1,82,14.0,9.5,380,85,40,260,12,24,,ibuprofen
