@@ -56,7 +56,8 @@ statuses, patterns, missing = analyse(p, history)
 st.title("BloodClue")
 st.caption("One place for every result. Every value coloured, every clue connected. The doctor decides.")
 
-tab_doc, tab_hist, tab_rank = st.tabs(["🩺 Doctor view", "🗂️ Patient history", "🏅 Doctor ranking"])
+tab_doc, tab_hist, tab_kb, tab_rank = st.tabs(["🩺 Doctor view", "🗂️ Patient history", "📚 Knowledge base",
+                                                "🏅 Doctor ranking"])
 
 # ---------- tab 1: doctor view ----------
 with tab_doc:
@@ -144,7 +145,28 @@ with tab_hist:
             st.dataframe(trend.style.apply(mark, axis=0).format(lambda v: "–" if pd.isna(v) else f"{v:g}"),
                          width="stretch")
 
-# ---------- tab 3: contributing doctors (demo data) ----------
+# ---------- tab 3: what the clinical partner teaches (draft) ----------
+with tab_kb:
+    import json
+    kb = json.loads((HERE / "knowledge.json").read_text(encoding="utf-8"))
+    st.subheader("What our clinical partner teaches")
+    st.info(f"Drafted from {sum(e['videos'] for e in kb)} references in the educational videos of a Dubai "
+            "internal-medicine specialist, translated from Arabic. **Draft:** every point awaits his sign-off before "
+            "it becomes a rule. Points with doses or uncertain numbers stay hidden until reviewed.", icon="📚")
+    kinds = {"lab_rule": "🧪 Lab", "symptom": "🩺 Symptom", "cause": "🔎 Cause", "treatment": "💉 Treatment",
+             "advice": "💡 Advice", "myth": "❌ Myth"}
+    for e in kb:
+        shown = [p for p in e["points"] if not p["needs_review"]]
+        hidden = len(e["points"]) - len(shown)
+        with st.expander(f"**{e['topic']}** · {e['videos']} videos"):
+            for p in shown:
+                st.markdown(f"- {kinds.get(p['type'], '•')}: {p['statement']}")
+            if hidden:
+                st.caption(f"{hidden} point(s) hidden until clinical review.")
+            if e["ask_patient"]:
+                st.markdown("**Questions to ask:** " + " · ".join(e["ask_patient"]))
+
+# ---------- tab 4: contributing doctors (demo data) ----------
 with tab_rank:
     st.subheader("Doctors who teach BloodClue")
     st.warning("**Demo data.** These are not real doctors or clinics; the real ranking will come from accepted, "

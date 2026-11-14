@@ -1,0 +1,1407 @@
+[
+ {
+  "topic": "Symptoms of iron deficiency",
+  "videos": 117,
+  "points": [
+   {
+    "type": "symptom",
+    "statement": "Iron carries oxygen to tissues; low iron means less oxygen delivery, which he calls a slow death of tissues. Symptoms: lethargy and fatigue (even on minimal exertion), dizziness, headache, poor concentration, forgetfulness, anxiety/tension, hair loss, interrupted sleep at night, pallor, dark circles under the eyes, nail changes, fast heartbeat, blurred vision and loss of energy. Iron deficiency and iron deficiency anaemia produce similar symptoms. It should not be lived with and must be treated.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "The brain is the largest consumer of iron, so dizziness and headache are among the most common symptoms of iron deficiency, along with poor concentration, forgetfulness, fear and anxiety. He advises against taking important life decisions with low ferritin and says emotions are poorly controlled.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Symptoms of iron deficiency: lethargy, fatigue, poor concentration, forgetfulness, dizziness, headache, weak falling hair, interrupted sleep, pallor, dark circles, palpitations, blurred vision, brittle nails, loss of energy, breathlessness on minimal exertion (one flight of stairs), rapid breathing, tension/anxiety, and fainting episodes.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Typical symptoms of low iron stores: fatigue and lethargy, poor concentration, forgetfulness, dizziness, headache, fragmented night sleep, pallor, dark circles under the eyes, weak or brittle nails, fast heartbeat/palpitations, tiredness on minimal exertion, cold extremities, blurred vision, and loss of energy. Some patients also report irritability, mood swings and numbness.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin (even with normal haemoglobin) causes fatigue and lethargy, poor concentration, forgetfulness, dizziness, headache, weak or falling hair with thinning patches, interrupted night sleep, pallor, dark circles under the eyes, palpitations, nail changes, cold extremities, skin changes and loss of energy, impairing daily life. Muscle cramps and numbness were reported in a celiac case.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Decline in a child's school performance or new forgetfulness in an adult (e.g. forgetting important dates) should prompt checking iron, B12 and thyroid.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Anxiety, fear and stress can be caused or worsened by anaemia (iron deficiency or other types), often with dizziness, headache, poor concentration, hair loss, pallor, broken sleep, irritability, mood swings and numbness. If these symptoms are present, the anaemia should be treated even if it is not the main cause.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low iron stores are among the most common causes of insomnia and fragmented night sleep, even when haemoglobin is normal.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Iron/haemoglobin carries oxygen to every cell; when low, the heart receives less oxygen and beats faster to compensate, which explains palpitations, and hair receives less oxygen, which explains hair weakness and loss. Low ferritin (e.g. 9) affects the heart muscle even with normal haemoglobin.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "A fast heartbeat is a symptom, not a disease, and has many causes. Before prescribing heart-rate-lowering drugs, check ferritin, because low ferritin (even with normal haemoglobin) can be the cause; in his case palpitations resolved after IV iron.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "A ferritin around 2.5 is dangerous in the long term, affecting the heart muscle and the brain, and should be raised with IV iron before looking for the cause.",
+    "condition": "ferritin < 3",
+    "needs_review": true,
+    "review_reason": "Number may be misheard; risk claim"
+   },
+   {
+    "type": "symptom",
+    "statement": "Uncommon complications of anaemia he lists: chronic constipation, rapid breathing, mouth ulcers, and an increased tendency to form blood clots.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "'Mouth ulcers' and clot-risk wording partly unclear in transcript"
+   },
+   {
+    "type": "symptom",
+    "statement": "Iron deficiency may cause thinness or prevent weight loss.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "From video title only; transcript empty"
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin makes losing weight difficult and gaining weight easier because it reduces metabolism (burning).",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "myth",
+    "statement": "Iron deficiency does not increase weight; it reduces appetite (especially in children). However, it weakens metabolism, so weight may plateau despite diet and exercise; in that situation, check ferritin. This also makes weight loss harder in type 2 diabetes.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low B12 can cause loss of appetite, and low zinc reduces appetite by impairing smell and taste; both can lower weight.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Fatigue or lack of energy?",
+   "Hair fall?",
+   "Interrupted sleep?",
+   "Palpitations?",
+   "Dizziness or headache?",
+   "Breathless climbing stairs?",
+   "What symptoms do you have?",
+   "How do these symptoms affect your daily life and work?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Poor absorption is the main cause",
+  "videos": 69,
+  "points": [
+   {
+    "type": "cause",
+    "statement": "Healthy stomach acid is required for iron absorption. Acid-suppressing stomach medicines, bariatric surgery, gastritis, reflux and gastric sleeve all impair it.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Poor iron absorption is a common cause of iron deficiency in people who eat a normal diet: low water intake, tea immediately after meals, long-term acid-suppressing drugs, processed food, poor chewing, and GI disease: gastritis, ulcers, reflux, bariatric/sleeve surgery, irritable bowel, coeliac disease, ulcerative colitis, Crohn's and autoimmune disease. Such diseases also impair absorption of B12, calcium and other nutrients.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "In patients who eat normally, over 90% of very low ferritin values (e.g. Hb 11 with ferritin 5) are due to malabsorption; malabsorption is the most common cause, which is why correction is usually with IV iron.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Percentage claim (over 90%) may be misheard or overstated"
+   },
+   {
+    "type": "cause",
+    "statement": "Iron malabsorption means eating iron-containing food (animal or plant) without benefit. Causes: poor chewing, low water intake, excessive tea/coffee after meals, long-term acid-suppressing stomach medication (no acid for digestion and iron absorption), processed food damaging the gut microbiome, H. pylori, gastritis, reflux, irritable colon, ulcerative colitis, Crohn's disease, coeliac disease/wheat sensitivity, and bariatric surgery.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Poor absorption is currently the most common cause of low iron stores, so IV iron is the most common treatment; the body cannot use iron from food or tablets.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Low stomach acid is the main cause of low iron stores. Long-term (months to years) acid-suppressing medicines (proton pump inhibitors such as esomeprazole or pantoprazole) leave the patient without stomach acid, leading to deficiencies of iron, B12, calcium and magnesium; they relieve symptoms but do not treat the underlying problem. Stomach acid also protects against microbes in food and protects the stomach wall.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Stomach acid is valuable; leave it alone rather than suppressing it long term. The aim is to treat the digestive system properly so stomach medicines can be stopped.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Weight-loss stomach surgery is a cause of poor iron absorption.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "In coeliac disease (wheat/gluten sensitivity), damage to the small-intestinal villi prevents absorption of iron from food or tablets. He states that about 90-95% of people with coeliac disease have impaired iron absorption. Unexplained iron and B12 deficiencies should raise suspicion of undiagnosed coeliac disease and prompt testing.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Percentage from transcription"
+   },
+   {
+    "type": "cause",
+    "statement": "Active H. pylori infection causes gastritis and reduces stomach acid (directly or through the medicines used), so iron is not absorbed from food or tablets. It also reduces intrinsic factor, which he says is responsible for more than 95% of B12 absorption, so iron and B12 are the deficiencies most commonly seen with H. pylori.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Percentage from transcription"
+   },
+   {
+    "type": "cause",
+    "statement": "Other digestive problems causing poor absorption: long-standing irritable bowel syndrome, severe gastritis, severe reflux, hiatal (diaphragm) problems, and medicines that impair absorption.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Malabsorption causes include GI diseases (reflux, H. pylori, chronic gastritis, bariatric sleeve surgery, pancreatic and colon disease, Crohn's disease, SIBO, celiac disease), long-term acid-suppressing drugs (esomeprazole, pantoprazole), misuse of painkillers and antibiotics that destroy beneficial bacteria, metformin, poor chewing, hard-to-digest food, and tea, coffee, smoking and alcohol.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Iron deficiency results from low intake (e.g. vegetarian), malabsorption despite good intake, or iron loss through overt bleeding (e.g. heavy periods) or occult bleeding in stool or urine. Ask what lowered the ferritin before asking how to raise it.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Low iron stores have three causes: low intake (poor or unhealthy diet, restaurant/processed food, poor chewing, vegetarian; now uncommon since iron is available in animal and plant protein), increased loss (overt bleeding such as heavy periods, nosebleeds, major surgery, or occult bleeding in stool or urine), and malabsorption, the most common cause (he estimates 60-70% in one video and 75-80% in another).",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Percentages vary between videos and may be misheard."
+   },
+   {
+    "type": "cause",
+    "statement": "The two most common causes of iron malabsorption are low water intake and lack of stomach acid. Many patients with near-zero ferritin drank almost no water (e.g. one glass a day).",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "H. pylori is one of the most common causes of poor iron absorption: it lowers stomach acid (essential for iron absorption), causes chronic inflammation and ulcers with slight chronic bleeding, and makes the stomach environment unsuitable for absorption (also of calcium and magnesium). Oral iron will not work, giving only side effects; IV iron is the appropriate treatment until H. pylori is eradicated.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "Stomach-protecting acid suppressants (e.g. PPIs) are the most common drugs impairing B12 and iron absorption; while on them, replace B12 by injection and iron intravenously. They should be used for limited periods because they relieve symptoms without treating the underlying problem; in chronic gastritis the gastritis itself should be treated to stop them.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "In celiac disease iron is not absorbed from food or tablets, so iron is replaced intravenously, alongside a gluten-free diet and plenty of water; magnesium, zinc, calcium and phosphorus absorption may also be affected.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "Weight-loss surgery such as sleeve gastrectomy impairs absorption; with low ferritin after it, IV iron is needed, along with correcting water intake and supporting stomach acid.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "Patients on long-term stomach medication such as esomeprazole or pantoprazole can develop low iron and B12 because there is no acid to absorb them; while they stay on these drugs replacement should be intravenous (iron) or by intravenous/intramuscular injection (B12), not tablets.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Drug names partly garbled in transcript"
+   },
+   {
+    "type": "advice",
+    "statement": "Malabsorption is easy to suspect: if someone eats a healthy diet with good iron sources (chicken, meat, fish, tuna, salmon and plant protein, or e.g. daily beetroot) or takes iron tablets and still has low iron, there is an absorption problem and tablets will not help. Example: two months of iron tablets plus daily beetroot with ferritin still 7.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "To treat malabsorption, first identify its cause through a doctor visit: detailed history, then physical examination, then lab tests. Treating the cause matters more than treating symptoms.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Do you take stomach acid medicines (e.g. Nexium), and for how long?",
+   "How much water do you drink per day?",
+   "Do you drink tea right after meals?",
+   "Do you take stomach acid medicines?",
+   "Do you have reflux, gastritis, ulcers, IBS, coeliac disease, ulcerative colitis or Crohn's?",
+   "Have you had weight-loss (bariatric) surgery?",
+   "Do you eat meat, chicken and fish, or are you vegetarian?",
+   "Do you chew food slowly and well?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Oral iron or IV iron",
+  "videos": 63,
+  "points": [
+   {
+    "type": "treatment",
+    "statement": "When iron deficiency is due to poor absorption, IV iron is mandatory, not optional; oral iron tablets will not be absorbed even if taken for years and give only side effects.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Treatment recommendation; IV iron has its own risks and indications"
+   },
+   {
+    "type": "treatment",
+    "statement": "In inflammatory/autoimmune GI disease (Crohn's, ulcerative colitis, coeliac) or GI bleeding, oral iron does not help and may harm; IV iron is needed, with blood transfusion as the alternative. In coeliac disease, B12 deficiency should be treated with intramuscular injections.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Claim that oral iron may harm, and transfusion as alternative; safety-relevant"
+   },
+   {
+    "type": "treatment",
+    "statement": "Oral iron tablets suit vegetarians who eat no animal protein, people with very poor appetite who cannot eat, and those without access to iron-rich food. A person who eats a full normal diet and is still iron deficient should not get tablets; give IV iron and investigate the absorption problem.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "He prefers IV iron to restore ferritin: tablets take years to refill stores and commonly cause constipation, heartburn and nausea, while IV iron quickly relieves symptoms (hair loss, dark circles, energy).",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Comparative treatment claim; no dosing given"
+   },
+   {
+    "type": "treatment",
+    "statement": "If the body cannot absorb iron from food (including iron-rich chicken and meat), it cannot absorb it from tablets either; in malabsorption oral iron gives only side effects, and patients take it for months or years without benefit (even a well-tolerated tablet for over a month left ferritin unchanged). IV iron is the treatment.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "Two reasons to prescribe IV iron rather than tablets: deficiency symptoms are affecting daily and social life, and tablets or iron-rich food are not helping because of malabsorption. Example: Hb 8 or Hb 7 with ferritin near zero is not suitable for tablets.",
+    "condition": "ferritin < ref_low",
+    "needs_review": true,
+    "review_reason": "Treatment decision; Hb examples may be misheard"
+   },
+   {
+    "type": "treatment",
+    "statement": "When the cause of iron deficiency is poor absorption, iron tablets do not work no matter how long they are taken (years); iron-rich food also is not absorbed. IV iron is the appropriate, best and fastest treatment; tablets only waste time, effort and money and cause side effects.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron is a treatment like any other with specific indications, not chosen by preference: mainly malabsorption, or very low iron. Gastrointestinal side effects of iron tablets in a patient with stomach problems are another reason. He does not give IV iron unless absorption is impaired or iron is very low.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Treatment indication"
+   },
+   {
+    "type": "treatment",
+    "statement": "Neither is simply 'better'; choice depends on the cause. Oral iron fits low intake with normal absorption. IV iron is appropriate for malabsorption, heavy bleeding (chronic occult or large recent), heavy periods, severe symptoms impairing daily life, or intolerable side effects of tablets. He notes the American Society of Hematology did not say IV is better than oral.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "If symptoms and ferritin do not improve after months of iron tablets (8 months in his case, ferritin 21), suspect malabsorption and switch to IV iron, then investigate the cause.",
+    "condition": "ferritin <= 21",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "The cause of the deficiency, not preference, decides IV vs oral iron. Ask about diet, vegetarianism, heavy periods, bariatric surgery and overt or occult bleeding; if the patient eats normally, is not vegetarian and has no bleeding, the cause is malabsorption and IV iron is needed. Chronic bleeding or heavy periods are also indications for IV iron.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Do you eat animal protein?",
+   "Is your appetite normal?",
+   "Have you taken iron tablets before, for how long, and did ferritin rise?",
+   "Do you tolerate iron tablets?",
+   "Are your symptoms affecting your daily life?",
+   "How long have you taken iron tablets, and did they help?",
+   "Do you eat normally?",
+   "Are you vegetarian?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Normal haemoglobin does not rule out iron deficiency",
+  "videos": 57,
+  "points": [
+   {
+    "type": "myth",
+    "statement": "A normal haemoglobin does not rule out iron deficiency; iron stores (ferritin) can be low or near zero while haemoglobin is normal or even high. Ferritin must be measured.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low ferritin with normal haemoglobin is iron deficiency (without anaemia); low ferritin with low haemoglobin is iron deficiency anaemia. He treats these as two distinct conditions, each with its own causes and treatment, but with similar symptoms.",
+    "condition": "ferritin low and hb normal => iron deficiency; ferritin low and hb low => iron deficiency anaemia",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Case examples with ferritin of roughly 0-8 (e.g. ferritin 8 with Hb 14; ferritin 3, 2 or 1 with normal Hb; ferritin 5 with Hb 11-12; ferritin 4 in pregnancy) are all called iron deficient and must be treated, usually with IV iron, regardless of the haemoglobin value. He says no one should live with such levels.",
+    "condition": "ferritin <= 8",
+    "needs_review": true,
+    "review_reason": "He gives no explicit cutoff; threshold inferred from case examples; numbers may be misheard"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Haemoglobin and iron stores (ferritin) are different. A low ferritin alone is a disease called iron deficiency; if haemoglobin also falls it becomes iron deficiency anaemia. Each has its own causes, symptoms and treatment.",
+    "condition": "ferritin < ref_low and hb >= ref_low",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "A very low ferritin (examples given: 2, 3, 6, 7) must be treated even when haemoglobin is normal (12-13) or even high; patients with such values have symptoms that interfere with daily life.",
+    "condition": "ferritin < ref_low and hb >= ref_low",
+    "needs_review": true,
+    "review_reason": "Example ferritin/Hb numbers from speech transcription; no explicit cutoff stated"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low iron stores (ferritin) on their own are a disease, iron deficiency, with its own causes, symptoms, investigations, complications and treatment, even when haemoglobin is normal. If haemoglobin also falls, it becomes iron-deficiency anaemia.",
+    "condition": "ferritin < 50 and hb >= normal_lower_limit",
+    "needs_review": true,
+    "review_reason": "Threshold 50 taken from a single video; normal Hb limit not stated"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low ferritin (iron stores) is a disease in its own right, iron deficiency (without anaemia), with its own causes, symptoms, tests and treatment, even if haemoglobin is normal or high (e.g. 12-13+). It should be treated, not ignored.",
+    "condition": "ferritin <= 21 and hb >= normal",
+    "needs_review": true,
+    "review_reason": "He gives no explicit cutoff; 21 is the highest ferritin value he called low in this batch (examples 2-21)."
+   },
+   {
+    "type": "myth",
+    "statement": "Having a normal haemoglobin with a very low ferritin does not mean iron status is fine; he criticises calling a ferritin of 5 'normal'.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Do you have fatigue or lethargy?",
+   "Do you have poor concentration or forgetfulness?",
+   "Do you have dizziness or headaches?",
+   "Is your hair weak or falling out?",
+   "Is your sleep at night interrupted?",
+   "Do you have palpitations?",
+   "Do you have low energy?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "IV iron is half the treatment: find and treat the cause",
+  "videos": 54,
+  "points": [
+   {
+    "type": "myth",
+    "statement": "IV iron is not a permanent cure. Refilling ferritin relieves symptoms and is half the treatment; the more important half is finding and treating the cause (usually GI absorption problems) so the patient absorbs iron from food again and the deficiency does not recur.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Mentions 'four to five months' in context of IV iron effect; meaning unclear"
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron relieves symptoms but is only half the treatment; the more important half is identifying and treating the cause (water, healthy diet, digestive problems) so ferritin is maintained after the injections and the patient does not need iron for life.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron corrects symptoms and stores but is only half the treatment; the more important half is finding and treating the cause (malabsorption via history, examination and tests; or overt or occult bleeding) so the patient does not need IV iron again.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron (plus an iron-rich diet) is only half of the treatment and only relieves symptoms; the more important half is finding and treating the cause (malabsorption, low intake or bleeding) so the patient does not need IV iron again.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "He treats patients, not numbers: before treating low ferritin, ask whether iron-deficiency symptoms are present; if they are, he treats even when haemoglobin is normal.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "The wrong question is 'how do I raise my ferritin'; the right question is 'what made it low', followed by whether the patient has symptoms.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Occult (hidden) bleeding is more dangerous than visible bleeding.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "In chronic or iron deficiency anaemia, always ask about visible bleeding and its site: nosebleeds, gum/dental bleeding, varices, surgery or wounds, heavy menstrual periods, frequent blood donation (donors are screened on haemoglobin, not ferritin), and frequent cupping (hijama). Also consider slow hidden bleeding: GI inflammation, ulcers or tumours, kidney inflammation or tumours, overuse of painkillers, and blood thinners.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Anaemia has many causes besides low ferritin, including B12 deficiency, copper deficiency and hypothyroidism, because the blood-cell factory lacks materials. He searches for all of these; finding and treating the cause matters more than replacing deficiencies.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Transcript has gaps where nutrient names are missing"
+   }
+  ],
+  "ask_patient": [
+   "Do you have fatigue or lethargy?",
+   "Do you have poor concentration or forgetfulness?",
+   "Do you have dizziness or headaches?",
+   "Is your hair weak or falling out?",
+   "Is your sleep at night interrupted?",
+   "Do you have palpitations?",
+   "Do you have low energy?",
+   "What caused your iron stores to drop?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Underactive-thyroid symptoms with normal thyroid tests",
+  "videos": 42,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "If a patient has hypothyroid-like symptoms (lethargy, weight gain that will not come off, chronic constipation, weak hair, rough skin, menstrual irregularity) but normal thyroid tests, check ferritin. Low ferritin, even with normal haemoglobin, can cause functional thyroid underactivity; correcting it, usually with IV iron, restores function and the symptoms resolve.",
+    "condition": "ferritin low and hb normal",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin, even with normal haemoglobin, can cause functional hypothyroidism: all hypothyroid symptoms (sleepiness, puffy face/eyes, dry skin, coarse falling hair, cold intolerance, chronic constipation, heavy periods, weight not dropping) with normal T3, T4 and TSH. Correcting iron, usually IV, restores thyroid function. In someone already diagnosed with true hypothyroidism on tablets, correcting iron does not restore the thyroid.",
+    "condition": "ferritin < ref_low",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Very low iron stores, even with normal haemoglobin, can cause 'functional hypothyroidism': all symptoms of an underactive thyroid (weight gain resistant to diet and exercise, constant cold, sluggishness, chronic constipation, reduced hearing, puffy face, coarse hair and skin, heavy periods, loss of energy) with normal thyroid tests. He explains low iron impairs thyroid hormone action at the cellular level or raises inactive hormone. Correcting iron (usually IV) and its cause restores thyroid function.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "If a patient has hypothyroid symptoms but normal thyroid hormone tests, do not close the thyroid question; check serum ferritin. If ferritin is low, even with normal haemoglobin, it may be causing functional hypothyroidism.",
+    "condition": "ferritin < 50",
+    "needs_review": true,
+    "review_reason": "Threshold 50 inferred; thyroid values not a supported key"
+   },
+   {
+    "type": "cause",
+    "statement": "Low ferritin, even with normal haemoglobin, does not cause an overactive thyroid; it causes functional hypothyroidism in men, women and children: TSH, T3/T4 are normal but iron deficiency impairs the enzymes that let thyroid hormones work, so the patient has all hypothyroid symptoms with normal thyroid tests. Correcting ferritin (usually IV iron) makes these symptoms resolve.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "The 'triangle of terror' in women: hypothyroidism, heavy periods and iron deficiency aggravate each other. When true hypothyroidism is present it is corrected first, then iron deficiency with IV iron; once both were corrected, periods became regular. When the triangle is driven by low iron, IV iron plus treating its cause breaks it and the thyroid and periods improve.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Treatment sequencing"
+   }
+  ],
+  "ask_patient": [
+   "Hypothyroid symptoms with normal thyroid tests?",
+   "Already diagnosed and treated for hypothyroidism?",
+   "Do you have weight gain, feeling cold, constipation, puffy face or coarse skin/hair?",
+   "Do you have symptoms of an underactive thyroid despite normal thyroid tests?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Heavy periods and the iron cycle",
+  "videos": 39,
+  "points": [
+   {
+    "type": "cause",
+    "statement": "Iron deficiency by itself can cause heavy menstrual periods, and heavy periods cause iron deficiency, creating a vicious circle; often a third factor, poor iron absorption (e.g. tea after meals, GI disease), is present. Women with heavy periods of unclear cause should have ferritin checked even if haemoglobin is normal. Treatment is IV iron plus fixing the absorption problem; oral iron does not work in this setting.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Low ferritin can cause heavy periods, and heavy periods cause iron deficiency, a closed vicious circle. Whether iron deficiency is the cause or other causes exist, iron must be corrected (usually IV), even when gynaecology and thyroid assessment find nothing.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Low iron stores, even with normal haemoglobin, can cause heavy menstrual bleeding, and heavy bleeding further depletes iron (and may lower haemoglobin): a closed vicious circle. Correcting iron (usually IV) can normalise the periods.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "For heavy menstrual bleeding, start with a gynaecologist to confirm or exclude gynaecological causes; then consider internal-medicine causes: low iron stores first, and hypothyroidism second.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "With heavy menstrual bleeding or bleeding from fibroids, oral tablets are not enough to match the iron being lost, so IV iron is given until the bleeding source is treated. Example: fibroids with haemoglobin 10 and no iron stores.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Treatment recommendation"
+   },
+   {
+    "type": "cause",
+    "statement": "Low ferritin, even with normal haemoglobin, can cause heavy (or irregular) menstrual periods, and heavy periods in turn deplete iron further, a vicious cycle. He corrects iron, usually with IV iron because tablets cannot cover the quantity or time lost; if ferritin was the cause, periods return to normal. If heavy bleeding persists after IV iron, other causes must be excluded with a gynaecologist.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Are your periods heavy, and were they heavy before the iron deficiency?",
+   "Do you drink tea right after meals?",
+   "Are your periods heavy?",
+   "Are your periods heavy or frequent?",
+   "Are your periods heavy or irregular?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Ferritin is more reliable than haemoglobin (dehydration hides anaemia)",
+  "videos": 36,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "Both ferritin and haemoglobin matter, but ferritin is the more reliable test for diagnosing iron deficiency; haemoglobin can look normal while ferritin is low.",
+    "condition": "ferritin low and hb normal => iron deficiency still present",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low water intake (haemoconcentration) and smoking, including shisha, raise haemoglobin above its true value, which can mask iron deficiency; ferritin reveals the true iron status.",
+    "condition": "hb normal and ferritin low => consider dehydration or smoking masking a lower true hb",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Case: ferritin zero with haemoglobin 14 and full iron-deficiency symptoms. After one month of correct water intake, haemoglobin fell from 14 to 12 while ferritin was unchanged (iron was not yet treated). This showed low water intake was contributing to poor absorption, and once hydration was corrected IV iron could be given.",
+    "condition": "ferritin < 1 and hb >= 14",
+    "needs_review": true,
+    "review_reason": "Case-report numbers from speech; ferritin 'zero' and Hb values may be misheard"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin is more trustworthy than haemoglobin. In dehydrated patients haemoglobin is falsely high from haemoconcentration and a near-zero ferritin reveals the true picture; after correcting water intake haemoglobin fell (e.g. 13 to 11 in three weeks, 13.6 to 11 in a month, about 1 g/dL per month, 14.2 with ferritin near zero).",
+    "condition": "ferritin < ref_low and hb >= ref_low",
+    "needs_review": true,
+    "review_reason": "Specific Hb values and rates of fall may be misheard"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Iron status is not judged by haemoglobin alone; ferritin must be checked. Ferritin is more reliable than haemoglobin for diagnosing iron deficiency. One patient had iron-deficiency symptoms for six months and was repeatedly told her iron was normal based on haemoglobin, but ferritin was very low.",
+    "condition": "ferritin < 50 and hb >= normal_lower_limit",
+    "needs_review": true,
+    "review_reason": "Threshold 50 inferred from another video"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Dehydration (very low water intake) concentrates the blood and makes haemoglobin falsely normal or high ('haemoconcentrated haemoglobin'), masking anaemia while ferritin is near zero. Heavy smoking is also mentioned as a cause of falsely normal haemoglobin. After correcting water intake, haemoglobin fell to its true level: 13.5 to 11.5 in 2 months, 14 to 12 in 6 weeks, 13 to 11 in 2 months, 14.1 to 12.9 in 3 weeks, 14.3 to 13.3 in 3 weeks (expected to reach its true value in 2-3 months).",
+    "condition": "ferritin < 10 and hb >= 12",
+    "needs_review": true,
+    "review_reason": "Multiple numeric values from transcription; smoking mentioned only in title"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin is more reliable than haemoglobin for diagnosing iron deficiency (in the presence of symptoms); never ignore a low ferritin because haemoglobin looks normal or high.",
+    "condition": "ferritin <= 21 and hb >= normal",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Poor water intake (dehydration) concentrates the blood and makes haemoglobin falsely high (haemoconcentration), masking anaemia. In his cases, correcting water intake for about 3 weeks to 1 month dropped haemoglobin from about 14.1 to 12.2, 13.9 to 12.2, 13 to 11, 14.5 to 12.1 and 14.5 to 11.5 while ferritin stayed low. He advises 2-3 L of water daily for 2-3 weeks, then repeating haemoglobin.",
+    "condition": "hb >= normal and ferritin <= 21",
+    "needs_review": true,
+    "review_reason": "Contains water-volume advice and haemoglobin values from speech that may be misheard."
+   },
+   {
+    "type": "treatment",
+    "statement": "With very low ferritin and haemoglobin concentrated by severe dehydration (Hb 14.2), he gave neither oral iron (no absorption) nor immediate IV iron; he first corrected water intake for one month, confirmed haemoglobin dropped, then gave IV iron.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Reason for delaying IV iron is unclear in the transcript; Hb value may be misheard"
+   },
+   {
+    "type": "advice",
+    "statement": "In a dehydrated patient with falsely high haemoglobin, he first corrects water intake and rechecks haemoglobin, then gives IV iron once the true haemoglobin is known. Recommended intake mentioned: about 1.5-2 litres of water per day.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Fluid volume from transcription"
+   },
+   {
+    "type": "advice",
+    "statement": "Correct water intake first, then iron: women given IV iron improved in most symptoms but did not see hair and skin results until hydration was corrected.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "In a dehydrated patient with low ferritin and falsely normal haemoglobin, vitamin D was the only normal result; he attributes this to vitamin D being fat-soluble and therefore not affected by water intake.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "How much water do you drink per day?",
+   "Do you smoke cigarettes or shisha?",
+   "Do you drink juices or soft drinks instead of water when thirsty?",
+   "Do you drink mostly juice or soft drinks instead of water?",
+   "Do you smoke heavily?",
+   "How much water do you drink?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Low ferritin, fertility and pregnancy",
+  "videos": 33,
+  "points": [
+   {
+    "type": "cause",
+    "statement": "Low ferritin can delay pregnancy in women. In delayed conception, correct ferritin, usually with IV iron, even if haemoglobin is normal; he cites a case conceiving after 8 years once iron was corrected.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin, regardless of normal or even high haemoglobin, can delay pregnancy, possibly via functional hypothyroidism. Women with delayed pregnancy should check ferritin; he reports several cases (ferritin near zero or 9, Hb about 12, including after failed IVF) who conceived after IV iron.",
+    "condition": "ferritin < ref_low",
+    "needs_review": true,
+    "review_reason": "Fertility efficacy claim based on anecdotal cases; values may be misheard"
+   },
+   {
+    "type": "symptom",
+    "statement": "Low iron stores are associated with delayed conception in women, even when haemoglobin is normal.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Low ferritin, even with normal haemoglobin, is a cause of delayed conception: directly, by reducing oxygen/energy to the ovaries and lowering egg production and quality, and indirectly through functional hypothyroidism. Correcting iron (usually IV) may allow pregnancy; the cause of low ferritin must then be treated.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron is safe in pregnancy after the first trimester and is not preferred in the first trimester. Iron requirements double in pregnancy, tablets struggle to meet them, and their side effects (nausea, heartburn, constipation) add to pregnancy symptoms; IV iron is the ideal treatment, e.g. for a pregnant woman with ferritin 4.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Pregnancy safety and trimester restriction; ferritin value may be misheard"
+   },
+   {
+    "type": "treatment",
+    "statement": "Iron requirement doubles in pregnancy, so pre-existing deficiency worsens and affects mother and baby. IV iron is safe in pregnancy after the first three months and preferred over tablets, because oral iron side effects (nausea, heartburn, constipation, abdominal pain, metallic taste) overlap with pregnancy symptoms.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Pregnancy safety and trimester timing claim"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin of 5 in a woman 9 months pregnant risks preterm birth, low birth weight and impaired cognitive development of the baby; give IV iron quickly, even with normal haemoglobin, with no time for tablets or their side effects.",
+    "condition": "ferritin <= 5",
+    "needs_review": true,
+    "review_reason": "Pregnancy treatment advice."
+   }
+  ],
+  "ask_patient": [
+   "Are you trying to conceive, and for how long?",
+   "Are you trying to conceive / delayed pregnancy?",
+   "Are you trying to conceive and experiencing delay?",
+   "Are you pregnant and which trimester?",
+   "Are you pregnant, and how far along?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Hair loss, early greying and ferritin",
+  "videos": 27,
+  "points": [
+   {
+    "type": "advice",
+    "statement": "Hair is the weakest organ and the first affected by low iron stores. Anyone with weak, falling or thinning hair should check ferritin before spending money on hair or skin products; these have little value until ferritin (and hydration) are corrected.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Before treating hair loss, confirm six things: adequate hydration, ferritin, B12, zinc, vitamin D and normal thyroid function.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "If ferritin is normal, other hair-loss causes are dehydration (low water intake), low B12, vitamin D, zinc or copper, and stress/anger raising cortisol. Low B12 together with low copper can cause premature greying.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "cause",
+    "statement": "Iron carries oxygen to organs; hair is the weakest organ, so low iron causes weak, falling hair and bald patches even with normal haemoglobin. The two factors that matter most for hair are ferritin and water; zinc, copper, vitamin D and B12 also contribute. Hair will not return to normal until ferritin is corrected, usually with IV iron.",
+    "condition": "ferritin < ref_low",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low iron stores are one of the most common causes of weak, thinning hair and hair loss (sometimes with visible gaps), even when haemoglobin is normal; hair is often the symptom patients most want fixed.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin is one of the most common causes of weak and falling hair; poor water intake is another major cause.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin combined with dehydration and low B12, vitamin D or zinc can lead beyond hair loss to premature greying.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "myth",
+    "statement": "Low iron stores do not cause premature greying of hair. He attributes noticeable early greying to a combination of other deficiencies, including copper (the other nutrient named is unclear in the transcript).",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Second nutrient garbled in transcript"
+   },
+   {
+    "type": "myth",
+    "statement": "Creams, oils, shampoos and hair sessions are of no value while ferritin is low or the patient is dehydrated; correct ferritin and water intake first and save money.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "myth",
+    "statement": "He disputes the idea that low ferritin is unrelated to hair loss; low ferritin is among the most common causes of hair thinning and patches.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Hair fall or bald patches?",
+   "Water intake?",
+   "Is your hair falling out?",
+   "How much water do you drink?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Very low ferritin needs prompt treatment",
+  "videos": 25,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "When ferritin is as low as about 3, he gives IV iron regardless of the cause, because the patient is suffering in daily life; the cause is then investigated and treated.",
+    "condition": "ferritin <= 3",
+    "needs_review": true,
+    "review_reason": "Number from transcription; treatment decision"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin around 2-4.3 with haemoglobin around 10-11 and symptoms: oral tablets have no role or benefit; give IV iron promptly, then investigate the cause (malabsorption, overt bleeding or occult bleeding).",
+    "condition": "ferritin < 5 and hb <= 11.1",
+    "needs_review": true,
+    "review_reason": "Numbers from transcription; treatment decision"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "When haemoglobin also falls along with low ferritin, the diagnosis becomes iron deficiency anaemia, which likewise has its own causes, symptoms, tests and treatment.",
+    "condition": "ferritin <= 21 and hb < normal",
+    "needs_review": true,
+    "review_reason": "Ferritin cutoff inferred from his examples, not stated."
+   },
+   {
+    "type": "lab_rule",
+    "statement": "He describes ferritin values in the single digits to about 11 (e.g. 2, 3, 4, 5, 7, 11) as essentially zero or 'below zero'. Such levels must be treated promptly, even before the cause is identified and regardless of haemoglobin; treatment is usually IV iron, followed by searching for the cause.",
+    "condition": "ferritin <= 11",
+    "needs_review": true,
+    "review_reason": "Numeric interpretation from spoken examples; urgent-treatment advice."
+   },
+   {
+    "type": "lab_rule",
+    "statement": "IV iron is preferred over tablets when ferritin is very low (he gives about 15 as an example).",
+    "condition": "ferritin <= 15",
+    "needs_review": true,
+    "review_reason": "Single example value from a Whisper transcript."
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin around 1-7 with haemoglobin 10 is severe: not something to manage online but a hospital case, needing IV iron courses or blood transfusion because it can endanger the heart muscle; tablets have no role. Afterwards the cause must be found and treated.",
+    "condition": "ferritin <= 7 and hb <= 10",
+    "needs_review": true,
+    "review_reason": "Transfusion/urgent-care advice based on two example cases."
+   },
+   {
+    "type": "lab_rule",
+    "statement": "When both ferritin and haemoglobin are low, the diagnosis is iron-deficiency anaemia rather than iron deficiency alone. Example: ferritin near zero with haemoglobin 8-10 is a new anaemia affecting the patient's life and work.",
+    "condition": "ferritin < 50 and hb < normal_lower_limit",
+    "needs_review": true,
+    "review_reason": "Numbers from transcription; thresholds not stated explicitly"
+   }
+  ],
+  "ask_patient": [
+   "What symptoms do you have?",
+   "Do you have fatigue or lethargy?",
+   "Do you have poor concentration or forgetfulness?",
+   "Do you have dizziness or headaches?",
+   "Is your hair weak or falling out?",
+   "Is your sleep at night interrupted?",
+   "Do you have palpitations?",
+   "Do you have low energy?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Restless legs and pica",
+  "videos": 17,
+  "points": [
+   {
+    "type": "symptom",
+    "statement": "Uncommon features of severe iron deficiency (low ferritin and low haemoglobin) include restless legs (leg movements during rest or sleep, also in children) and pica: cravings to eat ice, rice grains, sand or soil. These have other causes, but he always checks iron.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Near-zero ferritin can cause cravings for unusual items such as ice, sand, soil or raw rice, especially in children; this should prompt suspicion of iron deficiency.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Severely low iron can cause restless legs syndrome: an urge to move the legs, especially before sleep, kicking during sleep and difficulty sleeping; suspect iron deficiency including in children.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low iron stores can cause cravings for unusual non-food items (pica) such as ice, chalk, raw rice and soil, especially in children, even with normal haemoglobin.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low iron stores can be one cause of restless legs syndrome: involuntary leg movements and kicking at night that disrupt sleep.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Very low ferritin can cause cravings for unusual substances (pica), most often ice, but also soil or raw rice or pasta. It is treated with IV iron because such low levels are hard to replace with tablets, and it resolves without returning.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "symptom",
+    "statement": "Low ferritin is a cause of restless legs syndrome (excess limb movement, especially legs at night, inability to sleep, kicking during sleep). He treats it with IV iron, after which it resolves.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Do you crave eating ice, raw rice, sand or soil?",
+   "Do your legs move restlessly when resting or asleep?",
+   "Craving ice, soil, sand or raw rice (especially children)?",
+   "Urge to move legs before sleep or kicking in sleep?",
+   "Do you crave ice, raw rice, soil or chalk?",
+   "Do you have restless or kicking legs at night?",
+   "Do you crave ice, soil, raw rice or other unusual things?",
+   "Do your legs feel restless or kick at night, keeping you from sleeping?"
+  ],
+  "needs_review": false
+ },
+ {
+  "topic": "Water intake and hydration",
+  "videos": 15,
+  "points": [
+   {
+    "type": "advice",
+    "statement": "Daily water need in millilitres per 24 hours = body weight (kg) x 30.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Numeric formula from speech"
+   },
+   {
+    "type": "advice",
+    "statement": "Correct water intake is essential: low water intake causes iron malabsorption and falsely high haemoglobin. Juices and soft drinks are not a substitute; in one case intake was increased from one glass to two litres a day. Water and healthy food are part of treatment.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Volume figure (2 L) from a single case"
+   },
+   {
+    "type": "cause",
+    "statement": "Low water intake impairs iron absorption; it was the main cause in several cases of very low ferritin despite iron-rich diet or tablets.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "How much water do you drink per day?",
+   "How much plain water do you drink daily?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "B12 deficiency alongside iron deficiency",
+  "videos": 13,
+  "points": [
+   {
+    "type": "treatment",
+    "statement": "About 90% of B12 deficiency is due to poor absorption, so injections are needed; tablets are appropriate only for vegetarians.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "90% figure and route recommendation"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "B12 is often low together with iron because GI malabsorption affects both. If iron-deficiency-type symptoms are present, also check B12. B12 deficiency symptoms: poor concentration, forgetfulness and disorientation (the first symptom), fatigue, dizziness, headache, imbalance, hair loss, premature greying, insomnia, tingling/numbness, muscle cramps, irritability and mood swings.",
+    "condition": "ferritin low => also check b12",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin near zero together with low B12 usually indicates malabsorption. Combined symptoms include hair loss, pallor, dark circles, weak chewing muscles, dry skin, tingling, muscle cramps, palpitations, blurred vision, mood swings and irritability. Raise both with IV iron and B12 injections, then find the cause.",
+    "condition": "ferritin < ref_low and b12 < ref_low",
+    "needs_review": true,
+    "review_reason": "B12 partly inferred from title; words missing in transcript"
+   },
+   {
+    "type": "treatment",
+    "statement": "With malabsorption (coeliac disease, H. pylori, long-term acid suppressants), B12 like iron cannot be replaced by tablets or food and is given by injection (intramuscular) or intravenously until the digestive cause is treated.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Route of B12 therapy; garbled audio"
+   },
+   {
+    "type": "symptom",
+    "statement": "Symptoms associated with B12 and iron deficiency from malabsorption include numbness, muscle cramps, back/spine and bone problems, irritability, mood changes, dizziness, headache, poor concentration and forgetfulness.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [],
+  "needs_review": true
+ },
+ {
+  "topic": "Follow-up and targets after IV iron",
+  "videos": 12,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "After finishing IV iron, wait three weeks before re-measuring ferritin; testing earlier gives a falsely very high value.",
+    "condition": "ferritin high",
+    "needs_review": true,
+    "review_reason": "Timing interval (3 weeks) is a number that affects interpretation"
+   },
+   {
+    "type": "advice",
+    "statement": "Do not measure iron/ferritin until one month after the last IV iron dose, otherwise results will be falsely high.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Timing interval affects interpretation"
+   },
+   {
+    "type": "treatment",
+    "statement": "With ferritin around 7 due to malabsorption, he gives IV iron to raise ferritin above 60.",
+    "condition": "ferritin < 60",
+    "needs_review": true,
+    "review_reason": "Numeric target may be misheard"
+   },
+   {
+    "type": "advice",
+    "statement": "After IV iron and symptom resolution, the patient follows healthy eating, exercise and proper water intake for three months and is then re-evaluated (including the digestive system). One patient, after fixing water, diet and reflux, had stable ferritin a year later with no further treatment and no more heavy periods.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Do not recheck serum iron or ferritin until at least 6 weeks after the last IV iron dose (he also says not to rush to recheck within 1-2 months), or results will falsely suggest iron overload. After B12 injections or tablets, wait at least 3-4 weeks before measuring (the video title says 6 weeks).",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Timing intervals; title and speech differ for B12."
+   },
+   {
+    "type": "treatment",
+    "statement": "After IV iron patients report improvement in energy, sleep, hair fall, concentration, dizziness, headache and palpitations (e.g. hair improved after two infusions with ferritin 8); the course should still be completed.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Anecdotal efficacy; ferritin value may be misheard"
+   }
+  ],
+  "ask_patient": [
+   "When was your last IV iron dose?",
+   "When did you last receive IV iron or a B12 injection?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "IV iron safety, dosing and myths",
+  "videos": 11,
+  "points": [
+   {
+    "type": "treatment",
+    "statement": "IV iron is not given randomly; the dose is calculated from the patient's weight, age and clinical situation. There are two types of IV iron: one given as a course of five infusions, the other possibly as two infusions; courses may be repeated.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Contains dosing regimen (number of infusions)"
+   },
+   {
+    "type": "treatment",
+    "statement": "If a patient with malabsorption has low ferritin and low haemoglobin and is allergic to IV iron (very rare), give a red-cell transfusion to correct the situation until the cause is found.",
+    "condition": "ferritin < ref_low and hb < ref_low",
+    "needs_review": true,
+    "review_reason": "Transfusion recommendation; unsafe if wrong"
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron has indications, method of use, contraindications and side effects; the possible side effect is hypersensitivity, so a test is done before giving it. Kidney and liver function should be checked before IV iron. Hypersensitivity is very rare.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Safety procedure"
+   },
+   {
+    "type": "treatment",
+    "statement": "If a patient with malabsorption and significant iron-deficiency symptoms is allergic to IV iron (rare), red cell transfusion is used to relieve symptoms while the absorption problem (e.g. after bariatric surgery with low water intake) is corrected.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Transfusion decision"
+   },
+   {
+    "type": "myth",
+    "statement": "IV iron does not harm the kidneys unless the patient is dehydrated; in that case the patient is told to correct water intake first. IV iron does not darken the face.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Safety claim"
+   },
+   {
+    "type": "myth",
+    "statement": "IV iron does not darken the face or skin; on the contrary it removes pallor and improves facial colour by raising blood oxygen.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "myth",
+    "statement": "Concern that long-acting IV iron causes iron accumulation/deposition is unfounded in a patient who is iron deficient, because the dose is calculated individually.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Safety claim about overload"
+   },
+   {
+    "type": "treatment",
+    "statement": "IV iron is not dangerous or forbidden for children; the indications are the same as in adults (malabsorption, heavy bleeding, symptomatic deficiency) though doses differ by age. Growing children need more iron than adults.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Paediatric IV iron statement from a Whisper transcript."
+   }
+  ],
+  "ask_patient": [
+   "Any previous allergy to iron injections?",
+   "How much water do you drink per day?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "When to test and what to test",
+  "videos": 11,
+  "points": [
+   {
+    "type": "advice",
+    "statement": "He does not test only iron, only ferritin or only haemoglobin; he tests the whole iron profile plus other tests to tell iron deficiency from iron deficiency anaemia and to find the likely cause: poor absorption, low intake, or increased loss.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Blood donors (regular, irregular, or platelet/plasma donors) usually rely only on haemoglobin; they should also check ferritin, because haemoglobin can be good while ferritin is near zero.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Check ferritin regardless of haemoglobin in: hair loss or bald patches, heavy menstrual bleeding, delayed pregnancy, and hypothyroid symptoms with normal thyroid tests.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "He states the American Society of Hematology recently confirmed that low ferritin is iron deficiency disease requiring treatment even with normal or high haemoglobin, and raised the lower limits of ferritin for different age and sex groups.",
+    "condition": "",
+    "needs_review": true,
+    "review_reason": "Guideline claim from Whisper transcript; specific thresholds not given."
+   },
+   {
+    "type": "lab_rule",
+    "statement": "In children, check ferritin and not only haemoglobin; ferritin may be more important and more reliable than haemoglobin.",
+    "condition": "ferritin < 50",
+    "needs_review": true,
+    "review_reason": "Threshold 50 inferred from another video"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin values such as 4, 7, 10 or 20 (anything below 50) indicate weak iron stores; the key next question is which symptoms are present and how they affect daily life.",
+    "condition": "ferritin < 50",
+    "needs_review": true,
+    "review_reason": "Numeric threshold from speech transcription"
+   }
+  ],
+  "ask_patient": [
+   "Do you donate blood or blood components?",
+   "What symptoms do you have and how do they affect your daily life?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Diet, tea and iron absorption",
+  "videos": 8,
+  "points": [
+   {
+    "type": "advice",
+    "statement": "Tea contains tannic acid; taken after a meal it binds the iron just eaten into a non-absorbable complex. Drink tea away from lunch and dinner (like the English 5 o'clock tea); five mugs a day is too much.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Calcium and dairy products should not be taken with a main iron-containing meal. Oxalates (vegetables, especially spinach), phytates (legumes, nuts) and tannic acid in tea after meals reduce iron absorption; magnesium and zinc compete with iron for absorption; copper deficiency and loss of stomach acid from stomach medicines reduce iron absorption.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   },
+   {
+    "type": "advice",
+    "statement": "Iron is available in both animal and plant protein, and an iron-rich healthy diet is part of treatment.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "How many cups of tea/coffee per day and when relative to meals?",
+   "Do you drink tea with or after meals?",
+   "Do you take dairy or calcium with iron-rich meals?"
+  ],
+  "needs_review": false
+ },
+ {
+  "topic": "High ferritin needs a cause",
+  "videos": 7,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "A ferritin higher than expected should never be ignored. Ferritin behaves like an inflammatory marker and rises with any inflammation (e.g. dental, urinary tract, viral) or autoimmune disease; hidden tumours must be excluded, especially in older adults. Another cause is iron deposition disease (iron overload in the liver), often with a family history.",
+    "condition": "ferritin high",
+    "needs_review": true,
+    "review_reason": "Implies malignancy and haemochromatosis work-up; transcript partly garbled"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Any vaccine (COVID, influenza, etc.) can reactively raise ferritin; a high ferritin within one to two weeks of vaccination should not be interpreted as true high iron stores. Repeat the ferritin test about six weeks to two months after vaccination.",
+    "condition": "ferritin high",
+    "needs_review": true,
+    "review_reason": "Timing interval (6 weeks to 2 months) from speech, may be misheard"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "A very high ferritin does not mean excess iron in the body; ferritin is an inflammatory marker and rises with chronic inflammation. In one case ferritin about 400 without symptoms was due to chronic urinary and gynaecological infections; after treating them ferritin fell to 95. Search for chronic inflammation.",
+    "condition": "ferritin > ref_high",
+    "needs_review": true,
+    "review_reason": "Ferritin values 400 and 95 may be misheard"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Any inflammation (infectious: viral, bacterial, fungal; autoimmune; or rheumatic), current or within the past 1-2 months, raises ferritin above its normal level because ferritin is also an inflammatory marker. After the inflammation is treated, ferritin does not normalise immediately; it can take weeks, up to about six weeks. A falling ferritin can be used to monitor treatment of the inflammation.",
+    "condition": "ferritin > normal_upper_limit",
+    "needs_review": true,
+    "review_reason": "Interpretation of elevated ferritin; time course from transcription"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Ferritin is an inflammatory marker, like ESR, and rises with any inflammation (acute or chronic, bacterial, fungal, viral including COVID-19, autoimmune), recent vaccination, recent IV iron, and tumours (pancreatic tumour being the most common he cites), apart from hereditary causes such as haemochromatosis.",
+    "condition": "ferritin > upper_normal",
+    "needs_review": true,
+    "review_reason": "Malignancy association; condition uses lab upper-normal limit."
+   },
+   {
+    "type": "myth",
+    "statement": "Low iron stores do not cause blood cancers; the reverse is true: all types of leukaemia can cause low iron stores.",
+    "condition": "",
+    "needs_review": false,
+    "review_reason": ""
+   }
+  ],
+  "ask_patient": [
+   "Do you have any current infection (dental, urinary, viral)?",
+   "Do you have an autoimmune disease?",
+   "Is there a family history of iron overload?",
+   "Have you taken iron tablets for a long time or received IV iron?",
+   "Have you received any vaccine in the last two months?",
+   "Any chronic urinary or gynaecological infections (even without symptoms)?",
+   "Have you had any infection or inflammatory/autoimmune condition in the last 1-2 months?",
+   "Have you had a recent infection or vaccination?"
+  ],
+  "needs_review": true
+ },
+ {
+  "topic": "Links with vitamin D and HbA1c",
+  "videos": 7,
+  "points": [
+   {
+    "type": "lab_rule",
+    "statement": "Vitamin D of 7 together with ferritin of 3 is dangerous to live with: beyond hair, skin and pallor, it affects heart muscle, central and peripheral nerves, mood (depression, anxiety), numbness and the immune system. If tablets have failed, malabsorption is assumed and IV iron plus vitamin D injections are given, then the cause of malabsorption is treated.",
+    "condition": "ferritin <= 3",
+    "needs_review": true,
+    "review_reason": "Numbers from transcription; vitamin D value not a supported key; injection therapy"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low iron falsely raises HbA1c above its true value, which must be considered in patients at risk of diabetes. Example: ferritin 5, haemoglobin 10, HbA1c 6%, which may fall to 5.6% or lower after correcting iron (usually IV iron). In type 2 diabetes with low ferritin, give IV iron (even with normal haemoglobin), treat the cause, and recheck HbA1c after three months.",
+    "condition": "ferritin < 50",
+    "needs_review": true,
+    "review_reason": "HbA1c values from transcription; HbA1c not a supported key"
+   },
+   {
+    "type": "lab_rule",
+    "statement": "Low ferritin, even with normal haemoglobin, can falsely raise HbA1c (e.g. a true 6.1% reading as 6.5%). When assessing HbA1c in type 2 diabetes or prediabetes, check iron stores; treat the cause of low ferritin and repeat HbA1c. He states that after correction HbA1c of 5.6 or less means no diabetes and 5.6-6 means predisposition, managed with diet, regular exercise, weight loss and less stress.",
+    "condition": "ferritin <= 21",
+    "needs_review": true,
+    "review_reason": "HbA1c numbers from speech; diabetes thresholds stated by him."
+   }
+  ],
+  "ask_patient": [
+   "Are you on diet and exercise but your HbA1c is not improving?"
+  ],
+  "needs_review": true
+ }
+]
